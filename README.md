@@ -1,6 +1,6 @@
 # pixelbox
 
-Framework to fast prototyping small pixel games.
+Framework to fast prototyping pixel games.
 
 ### Install
 
