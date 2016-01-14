@@ -15,7 +15,8 @@
 		"socket.io": "0.9.x",
 		"jade": "*",
         "browserify": "13.0.0",
-		"uglify-js": "1.3.5"
+		"uglify-js": "1.3.5",
+		"audio-manager": "0.1.9"
 	},
 	"main": "server.js"
 }
