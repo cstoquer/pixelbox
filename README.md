@@ -2,6 +2,8 @@
 
 Framework to fast prototyping pixel games.
 
+[![Install with NPM](https://nodei.co/npm/pixelbox.png?downloads=true&stars=true)](https://nodei.co/npm/pixelbox/)
+
 Pixelbox is pretty much inspired by [PICO8](http://www.lexaloffle.com/pico-8.php)
 
 ### Install
@@ -47,3 +49,8 @@ you cannot have a file and a directory with the same name inside the same direct
  - `sfx('sound');` play the sound.mp3 file in `audio/` folder
  - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing,
  it will fade in and out to the new music. If no soundId is provided, the music stops.
+
+
+### Tools
+
+TODO
