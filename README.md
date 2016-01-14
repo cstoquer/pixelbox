@@ -36,7 +36,7 @@ object. The structure follow the structure of the directory. For instance, the f
 file located in `assets/images/sprites/player.png` will be accessible with 
 `assets.images.sprites.player`.
 
-Supported files includes: images (`.png`, `.jpg`), text (`.txt), JSON (`.json`)
+Supported files includes: images (`.png`, `.jpg`), text (`.txt`), JSON (`.json`)
 
 You directly have access to JSON content.
 
