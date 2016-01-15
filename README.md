@@ -1,6 +1,6 @@
 # Pixelbox
 
-Framework to fast prototyping pixel games.
+Framework for pixel-based games fast prototyping.
 
 [![Install with NPM](https://nodei.co/npm/pixelbox.png?downloads=true&stars=true)](https://nodei.co/npm/pixelbox/)
 
@@ -24,9 +24,9 @@ The application is rebuilt everytime you refresh the page in the browser.
 At the first startup, pixelbox will create a set of files and directories:
  - `assets/` is where you put your game assets files (images, text files, JSON)
  - `audio/` is where you put sounds and music
- - `src` is the source folder. `main.js` is the entry file of the game.
- - `build`
- - `node_modules`
+ - `src/` is the source folder. `main.js` is the entry file of the game.
+ - `build/`
+ - `node_modules/`
  - `index.html`
 
 ## Pixelbox API

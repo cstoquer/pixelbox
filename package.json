@@ -1,18 +1,31 @@
 {
 	"name": "pixelbox",
 	"author": "Cedric Stoquer",
-	"description": "Framework to fast prototyping pixel games",
+	"description": "Framework for pixel-based games fast prototyping",
 	"version": "0.0.10",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/cstoquer/pixelbox.git"
 	},
+	"keywords": [
+		"pixel",
+		"box",
+		"game",
+		"prototyping",
+		"prototype",
+		"jam",
+		"fast",
+		"canvas",
+		"arcade",
+		"console",
+		"pico8"
+	],
 	"bin": {
 		"pixelbox": "./bin/pixelbox"
 	},
 	"scripts": {
-		"start": "node server.js"
+		"start": "node index.js"
 	},
 	"dependencies": {
 		"express": "3.4.4",
@@ -23,5 +36,5 @@
 		"fs-extra": "0.26.4",
 		"audio-manager": "0.1.9"
 	},
-	"main": "server.js"
+	"main": "index.js"
 }
