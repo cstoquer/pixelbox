@@ -1,6 +1,6 @@
 # Pixelbox
 
-Framework for pixel-based games fast prototyping.
+A framework to fast-prototype pixel-based games.
 
 [![Install with NPM](https://nodei.co/npm/pixelbox.png?downloads=true&stars=true)](https://nodei.co/npm/pixelbox/)
 
@@ -51,6 +51,8 @@ you cannot have a file and a directory with the same name inside the same direct
  - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing,
  it will fade in and out to the new music. If no soundId is provided, the music stops.
 
+[AudioManger](https://github.com/Wizcorp/AudioManager) is the module that handle audio 
+loading and playback. You have access to its instance on `audioManager`.
 
 ## Tools
 
