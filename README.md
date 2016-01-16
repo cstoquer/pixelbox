@@ -58,15 +58,15 @@ you cannot have a file and a directory with the same name inside the same direct
 
 #### Text
 
-`print(text, [x, y])`
+`print(text, [x, y])` if x, y is provided, print text at pixel position (x, y). else print text at cursor position.
 
-`println(text)`
+`println(text)` print text and feed new line
 
-`locate(i, j)`
+`locate(i, j)` set cursor position at column i line j
 
-`pen(colorId)`
+`pen(colorId)` set text color to colorId in color palette
 
-`paper(colorId)`
+`paper(colorId)` set paper color to colorId in color palette.
 
 
 #### Sound
