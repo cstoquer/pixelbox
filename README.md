@@ -24,6 +24,7 @@ The application is rebuilt everytime you refresh the page in the browser.
 At the first startup, pixelbox will create a set of files and directories:
 ```
 assets/
+  |- spritesheet.png
 audio/
 build/
 src/
