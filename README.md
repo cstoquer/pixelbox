@@ -36,14 +36,27 @@ index.html
  - `audio/` is where you put sounds and music
  - `src/` is the source folder. `main.js` is the entry file of the game.
 
-## Pixelbox API
+## Programming with pixelbox
+
+Pixelbox provides:
+ - a 128*128 pixels canvas in which you can `print` text and `draw` sprites.
+ - a transparent asset loader
+ - a keyboard inputs manager
+ - an audio manager with transparent loading system
+ - an automatic builder
 
 #### Program structure
 
-Code is added in the `src/main.js`. If you provide a `exports.update` function,
-pixelbox will call it every frame.
+Your game entry point is the `src/main.js` file.
+If you provide a `exports.update` function, pixelbox will call it every frame.
+
+Build is made using [browserify](http://browserify.org/) which give you access
+to `require` and other things to easily modularize your project.
+The project is automaticaly rebuilt everytime you refresh the game page in your 
+web browser.
 
 #### Assets
+
 Pixebox load all assets for you at startup.
 All supported files you put inside the `assets/` directory will in an object `assets`.
 The structure follow the structure of the directory. For instance, the file
@@ -60,44 +73,36 @@ You directly have access to JSON content.
 Because files are loaded inside `assets` object and refered wthout their extension,
 you cannot have a file and a directory with the same name inside the same directory.
 
+## Pixelbox API
+
 #### Graphics
 
-`cls()` clear screen
-
-`sprite(n, x, y)` draw sprite number `n` on screen at pixel position `(x, y)`
-
-`draw(image, x, y)` draw an image or texture on screen at pixel position `(x, y)`
-
-`spritesheet(image)` use image as spritesheet
-
-`rect(x, y, w, h)` stroke a rectangle with pen color
-
-`rectfill(x, y, w, h)` fill a rectangle with paper color
+ - `cls()` clear screen
+ - `sprite(n, x, y)` draw sprite number `n` on screen at pixel position `(x, y)`
+ - `draw(image, x, y)` draw an image or texture on screen at pixel position `(x, y)`
+ - `spritesheet(image)` use image as spritesheet
+ - `rect(x, y, w, h)` stroke a rectangle with pen color
+ - `rectfill(x, y, w, h)` fill a rectangle with paper color
 
 #### Text
 
-`print(text, [x, y])` if x, y is provided, print text at pixel position (x, y). 
+ - `print(text, [x, y])` if x, y is provided, print text at pixel position (x, y). 
 else print text at cursor position.
-
-`println(text)` print text and feed new line. 
+ - `println(text)` print text and feed new line. 
 When cursor reach the bottom of the screen, a vertical scroll is applied 
 (just like it would happend in a terminal.)
-
-`locate(i, j)` set cursor position at column i line j
-
-`pen(colorId)` set text color to colorId in color palette
-
-`paper(colorId)` set paper color to colorId in color palette.
+ - `locate(i, j)` set cursor position at column i line j
+ - `pen(colorId)` set text color to colorId in color palette
+ - `paper(colorId)` set paper color to colorId in color palette.
 
 #### Controls
 
-`btn` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B`
-
-`btnp` if button has been pressed in current frame
-
-`btnr` if button has been released in current frame
+ - `btn` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B`
+ - `btnp` if button has been pressed in current frame
+ - `btnr` if button has been released in current frame
 
 #### Sound
+
  - `sfx('sound');` play the sound.mp3 file in `audio/` folder
  - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing,
  it will fade in and out to the new music. If no soundId is provided, the music stops.
@@ -105,10 +110,15 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
 [AudioManger](https://github.com/Wizcorp/AudioManager) is the module that handle audio 
 loading and playback. You have access to its instance on `audioManager`.
 
+#### Utility functions
+
+ - `clip(value, min, max)` clip a value between min and max
+ - `chr$(n)` return a character from code `n`.
+ - `random(n)` return a random **integer** between 0 and n
+
 ## Tools
 
 TODO
-
 
 ## Deployement
 
