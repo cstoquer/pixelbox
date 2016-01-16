@@ -64,8 +64,8 @@ web browser.
 Pixebox load all assets for you at startup.
 All supported files you put inside the `assets/` directory will in an object `assets`.
 The structure follow the structure of the directory. For instance, the file
-file located in `assets/images/sprites/player.png` will be accessible with 
-`assets.images.sprites.player`.
+file located in `assets/sprites/player.png` will be accessible with 
+`assets.sprites.player`.
 
 Supported files includes: 
  - images (`.png`, `.jpg`)
