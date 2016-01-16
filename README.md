@@ -64,9 +64,9 @@ you cannot have a file and a directory with the same name inside the same direct
 
 `cls()` clear screen
 
-`sprite(n, x, y)` draw sprite number `n` on screen position `(x, y)`
+`sprite(n, x, y)` draw sprite number `n` on screen at pixel position `(x, y)`
 
-`blit(texture, x, y)` draw a texture or image at position `(x, y)`
+`draw(image, x, y)` draw an image or texture on screen at pixel position `(x, y)`
 
 `spritesheet(image)` use image as spritesheet
 
@@ -91,11 +91,11 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
 
 #### Controls
 
-`button` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B`
+`btn` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B`
 
-`bpress` if button has been pressed in current frame
+`btnp` if button has been pressed in current frame
 
-`brelease` if button has been released in current frame
+`btnr` if button has been released in current frame
 
 #### Sound
  - `sfx('sound');` play the sound.mp3 file in `audio/` folder
