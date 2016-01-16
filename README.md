@@ -45,6 +45,10 @@ Pixelbox provides:
  - an audio manager with transparent loading system
  - an automatic builder
 
+pixelbox is also built-in with the following modules:
+ - `EventEmitter` API compatible port of Node.js' EventEmitter to the browser
+ - `inherits` inheritance utility function
+
 #### Program structure
 
 Your game entry point is the `src/main.js` file.
