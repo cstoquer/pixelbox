@@ -22,24 +22,38 @@ The application is rebuilt everytime you refresh the page in the browser.
 
 
 At the first startup, pixelbox will create a set of files and directories:
+```
+assets/
+audio/
+build/
+src/
+  |- main.js
+node_modules/
+index.html
+```
+
  - `assets/` is where you put your game assets files (images, text files, JSON)
  - `audio/` is where you put sounds and music
  - `src/` is the source folder. `main.js` is the entry file of the game.
- - `build/`
- - `node_modules/`
- - `index.html`
 
 ## Pixelbox API
 
-In your game code, here the list of available functions and objects:
+#### Program structure
+
+Code is added in the `src/main.js`. If you provide a `exports.update` function,
+pixelbox will call it every frame.
 
 #### Assets
-All supported files you put inside the `assets/` directory will be loaded in this
-object. The structure follow the structure of the directory. For instance, the file
+Pixebox load all assets for you at startup.
+All supported files you put inside the `assets/` directory will in an object `assets`.
+The structure follow the structure of the directory. For instance, the file
 file located in `assets/images/sprites/player.png` will be accessible with 
 `assets.images.sprites.player`.
 
-Supported files includes: images (`.png`, `.jpg`), text (`.txt`), JSON (`.json`)
+Supported files includes: 
+ - images (`.png`, `.jpg`)
+ - plain text files (`.txt`)
+ - JSON formatted data (`.json`)
 
 You directly have access to JSON content.
 
@@ -56,11 +70,18 @@ you cannot have a file and a directory with the same name inside the same direct
 
 `spritesheet(image)` use image as spritesheet
 
+`rect(x, y, w, h)` stroke a rectangle with pen color
+
+`rectfill(x, y, w, h)` fill a rectangle with paper color
+
 #### Text
 
-`print(text, [x, y])` if x, y is provided, print text at pixel position (x, y). else print text at cursor position.
+`print(text, [x, y])` if x, y is provided, print text at pixel position (x, y). 
+else print text at cursor position.
 
-`println(text)` print text and feed new line
+`println(text)` print text and feed new line. 
+When cursor reach the bottom of the screen, a vertical scroll is applied 
+(just like it would happend in a terminal.)
 
 `locate(i, j)` set cursor position at column i line j
 
@@ -68,6 +89,13 @@ you cannot have a file and a directory with the same name inside the same direct
 
 `paper(colorId)` set paper color to colorId in color palette.
 
+#### Controls
+
+`button` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B`
+
+`bpress` if button has been pressed in current frame
+
+`brelease` if button has been released in current frame
 
 #### Sound
  - `sfx('sound');` play the sound.mp3 file in `audio/` folder

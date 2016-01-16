@@ -9,17 +9,18 @@
 		"url": "https://github.com/cstoquer/pixelbox.git"
 	},
 	"keywords": [
-		"pixel",
-		"box",
-		"game",
-		"prototyping",
-		"prototype",
 		"jam",
+		"pico8",
+		"console",
+		"arcade",
+		"box",
+		"sandbox",
+		"prototyping",
 		"fast",
 		"canvas",
-		"arcade",
-		"console",
-		"pico8"
+		"prototype",
+		"pixel",
+		"game"
 	],
 	"bin": {
 		"pixelbox": "./bin/pixelbox"
