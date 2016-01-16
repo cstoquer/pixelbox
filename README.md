@@ -1,6 +1,6 @@
 # Pixelbox
 
-A framework to fast-prototype pixel-based games.
+A sandbox framework to fast-prototype pixel-based games.
 
 [![Install with NPM](https://nodei.co/npm/pixelbox.png?downloads=true&stars=true)](https://nodei.co/npm/pixelbox/)
 
@@ -45,6 +45,29 @@ You directly have access to JSON content.
 
 Because files are loaded inside `assets` object and refered wthout their extension,
 you cannot have a file and a directory with the same name inside the same directory.
+
+#### Graphics
+
+`cls()` clear screen
+
+`sprite(n, x, y)` draw sprite number `n` on screen position `(x, y)`
+
+`blit(texture, x, y)` draw a texture or image at position `(x, y)`
+
+`spritesheet(image)` use image as spritesheet
+
+#### Text
+
+`print(text, [x, y])`
+
+`println(text)`
+
+`locate(i, j)`
+
+`pen(colorId)`
+
+`paper(colorId)`
+
 
 #### Sound
  - `sfx('sound');` play the sound.mp3 file in `audio/` folder

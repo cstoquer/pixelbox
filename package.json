@@ -1,7 +1,7 @@
 {
 	"name": "pixelbox",
 	"author": "Cedric Stoquer",
-	"description": "A framework to fast-prototype pixel-based games",
+	"description": "A sandbox framework to fast-prototype pixel-based games",
 	"version": "0.0.12",
 	"license": "MIT",
 	"repository": {
