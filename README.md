@@ -24,11 +24,11 @@ The application is rebuilt everytime you refresh the page in the browser.
 At the first startup, pixelbox will create a set of files and directories:
 ```
 assets/
-  |- spritesheet.png
+ └── spritesheet.png
 audio/
 build/
 src/
-  |- main.js
+ └── main.js
 node_modules/
 index.html
 ```
@@ -83,7 +83,7 @@ you cannot have a file and a directory with the same name inside the same direct
 #### Graphics
 
  - `cls()` clear screen
- - `sprite(n, x, y)` draw sprite number `n` on screen at pixel position `(x, y)`
+ - `sprite(n, x, y [,flipH [,flipV]])` draw sprite number `n` on screen at pixel position `(x, y)`. `flipH` and `flipV` can be used to flip sprite horizontally or vertically
  - `draw(image, x, y)` draw an image or texture on screen at pixel position `(x, y)`
  - `spritesheet(image)` use image as spritesheet
  - `rect(x, y, w, h)` stroke a rectangle with pen color
