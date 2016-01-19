@@ -125,7 +125,7 @@ loading and playback. You have access to its instance on `audioManager`.
 
 TODO
 
-## Deployement
+## Deployment
 
 When your game is ready, the files you should deploy are:
 `assets`, `audio` and `build` folders along with the `index.html` file. 
