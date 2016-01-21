@@ -112,7 +112,7 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
  - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing,
  it will fade in and out to the new music. If no soundId is provided, the music stops.
 
-[AudioManger](https://github.com/Wizcorp/AudioManager) is the module that handle audio 
+[AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio 
 loading and playback. You have access to its instance on `audioManager`.
 
 #### Utility functions
