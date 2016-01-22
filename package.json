@@ -4,9 +4,13 @@
 	"description": "A sandbox framework to fast-prototype pixel-based games",
 	"version": "0.1.1",
 	"license": "MIT",
+	"preferGlobal": true,
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/cstoquer/pixelbox.git"
+	},
+	"bugs": {
+		"url": "http://github.com/cstoquer/pixelbox/issues"
 	},
 	"keywords": [
 		"jam",
