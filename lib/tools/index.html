@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>pixelbox tools</title>
+		<script type='text/JavaScript'>
+		// super naive component faker
+		var module  = {};
+		var exports = {};
+		var require = function (package) {
+			var className = package.split('/');
+			className = className[className.length - 1]; // remove directory path if any
+			className = className.split('.')[0];         // remove extension if any
+			return this[className] || exports;
+		};
+		</script>
+		<!-- ==================================================================== -->
+		<script type='text/JavaScript'>
+		inherits = function (Child, Parent) {
+			Child.prototype = Object.create(Parent.prototype, {
+				constructor: {
+					value: Child,
+					enumerable: false,
+					writable: true,
+					configurable: true
+				}
+			});
+		};
+		exports.inherits = inherits;
+		</script>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+	</head>
+
+	<body>
+		<script src="common/assetLoader/index.js" type="text/javascript"></script>
+		<script src="index.js"                    type="text/javascript"></script>
+	</body>
+</html>
