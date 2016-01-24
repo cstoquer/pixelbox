@@ -67,3 +67,13 @@ canvas {
 	width: 385px;
 	height: 385px;
 }
+
+.spritesheetCursor {
+	position: absolute;
+	top: -4px;
+	left: -4px;
+	background-image: url("spritesheetCursor.png");
+	width: 33px;
+	height: 33px;
+    z-index: 10;
+}
