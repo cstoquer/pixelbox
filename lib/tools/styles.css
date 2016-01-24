@@ -1,29 +1,35 @@
 body {
 	font-family: verdana;
 	background-color: #7F7F7F;
+	overflow: hidden;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 canvas {
-	border-radius: 5px;
-	box-shadow: 1px 1px 10px #333;
 	image-rendering: optimizeSpeed;
 	image-rendering: -moz-crisp-edges;
 	image-rendering: -webkit-optimize-contrast;
 	image-rendering: optimize-contrast;
 	image-rendering: pixelated;
 	-ms-interpolation-mode: nearest-neighbor;
+	background-color: #AAA;
 }
 
 .panel {
 	position: absolute;
+	padding: 2px;
 	left: 0px;
 	top: 0px;
-	width: 200px;
-	height: 100px;
-	border-radius: 3px;
+	border-radius: 5px;
 	box-shadow: 1px 1px 10px #333;
-	background-color: #CCC;
 	font-size: 10px;
+	background-color: #CCC;
+	z-index: 0;
 }
 
 .panelHandle {
@@ -33,4 +39,31 @@ canvas {
 	font-weight: bolder;
 	border-radius: 3px;
 	background-color: #AAA;
+}
+
+.panelContent {
+	padding: 1px;
+	text-align: left;
+	font-size: 17px;
+	border-radius: 3px;
+	background-color: #CCC;
+}
+
+.spritesheet {
+	position: relative;
+	width: 385px;
+	height: 385px;
+}
+
+.spritesheetInner {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.spritesheetGrid {
+	background-image: url("spritesheetGrid.png");
+	background-repeat: repeat;
+	width: 385px;
+	height: 385px;
 }
