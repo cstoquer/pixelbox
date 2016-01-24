@@ -1,5 +1,4 @@
 body {
-	text-align: center;
 	font-family: verdana;
 	background-color: #7F7F7F;
 }
@@ -13,4 +12,25 @@ canvas {
 	image-rendering: optimize-contrast;
 	image-rendering: pixelated;
 	-ms-interpolation-mode: nearest-neighbor;
+}
+
+.panel {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 200px;
+	height: 100px;
+	border-radius: 3px;
+	box-shadow: 1px 1px 10px #333;
+	background-color: #CCC;
+	font-size: 10px;
+}
+
+.panelHandle {
+	padding: 1px;
+	text-align: left;
+	font-size: 17px;
+	font-weight: bolder;
+	border-radius: 3px;
+	background-color: #AAA;
 }
