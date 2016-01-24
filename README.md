@@ -46,7 +46,8 @@ Pixelbox provides:
  - an audio manager with transparent loading system
  - an automatic builder
 
-pixelbox is also built-in with the following modules:
+pixelbox is also built-in with the following libraries and modules:
+ - `tina.js` tweening and animation library
  - `EventEmitter` API compatible port of Node.js' EventEmitter to the browser
  - `inherits` inheritance utility function
 
@@ -56,7 +57,7 @@ Your game entry point is the `src/main.js` file.
 If you provide a `exports.update` function, pixelbox will call it every frame.
 
 Build is made using [browserify](http://browserify.org/) which give you access
-to `require` and other things to easily modularize your project.
+to `require` and `exports` to easily modularize your project.
 The project is automaticaly rebuilt everytime you refresh the game page in your 
 web browser.
 
@@ -123,7 +124,7 @@ loading and playback. You have access to its instance on `audioManager`.
 
 ## Tools
 
-TODO
+Coming soon
 
 ## Deployment
 
