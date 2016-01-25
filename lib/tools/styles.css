@@ -33,12 +33,29 @@ canvas {
 }
 
 .panelHandle {
+	height: 20px;
 	padding: 1px;
+	border-radius: 3px;
+	background-color: #AAA;
+}
+
+.panelCloseButton {
+	background-color: #CCC;
+	width: 16px;
+	height: 16px;
+	border-radius: 3px;
+	display: inline-block;
+    margin: 2px;
+}
+
+.panelTitle {
+	height: 16px;
+	display: inline-block;
 	text-align: left;
 	font-size: 17px;
 	font-weight: bolder;
-	border-radius: 3px;
-	background-color: #AAA;
+	vertical-align: top;
+    margin: 0 2px;
 }
 
 .panelContent {
