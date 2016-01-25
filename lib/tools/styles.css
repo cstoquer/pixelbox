@@ -72,6 +72,10 @@ canvas {
 	height: 385px;
 }
 
+.spritesheetInfos {
+	height: 25px;
+}
+
 .spritesheetInner {
 	position: absolute;
 	top: 0;
