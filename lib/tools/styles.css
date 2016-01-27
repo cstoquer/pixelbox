@@ -98,3 +98,27 @@ canvas {
 	height: 33px;
     z-index: 10;
 }
+
+.paletteCanvas {
+	width: 160px;	
+}
+
+.paletteCell {
+	width: 36px;
+	height: 36px;
+	margin: 2px;
+	display: inline-block;
+    border-radius: 3px;
+    vertical-align: bottom;
+}
+
+.paletteCellNumber {
+	width: 15px;
+	height: 12px;
+	text-align: center;
+	background-color: #FFF;
+	font-size: 10px;
+	font-weight: bolder;
+}
+
+
