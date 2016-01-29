@@ -1,4 +1,4 @@
-# Pixelbox
+![pixelbox](https://cloud.githubusercontent.com/assets/2462139/12671050/6c0da564-c6b0-11e5-8a07-1380b8dddfaf.png)
 
 A sandbox framework to fast-prototype pixel-based games.
 
@@ -125,6 +125,8 @@ loading and playback. You have access to its instance on `audioManager`.
 ## Tools
 
 Coming soon
+
+![pixelbox_tools](https://cloud.githubusercontent.com/assets/2462139/12670965/d091a37e-c6af-11e5-8537-f82689f3496c.png)
 
 ## Deployment
 
