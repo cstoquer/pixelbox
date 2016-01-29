@@ -48,6 +48,21 @@ canvas {
     margin: 2px;
 }
 
+.panelToolbar {
+	height: 25px;
+}
+
+.panelToolButton {
+	background-color: #AAA;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin: 2px;
+	border-radius: 3px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
 .panelTitle {
 	height: 16px;
 	display: inline-block;
@@ -74,6 +89,8 @@ canvas {
 
 .spritesheetInfos {
 	height: 25px;
+	display: inline-block;
+	vertical-align: top;
 }
 
 .spritesheetInner {
