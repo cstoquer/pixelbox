@@ -138,4 +138,20 @@ canvas {
 	font-weight: bolder;
 }
 
+.mapClipSurface {
+	position: relative;
+	width: 384px;
+	height: 384px;
+	overflow: hidden;
+}
 
+.mapGrid {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-image: url("spritesheetGrid.png");
+	background-repeat: repeat;
+	width: 384px;
+	height: 384px;
+    z-index: 2;
+}
