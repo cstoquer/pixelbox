@@ -151,7 +151,5 @@ canvas {
 	top: 0;
 	background-image: url("spritesheetGrid.png");
 	background-repeat: repeat;
-	width: 384px;
-	height: 384px;
     z-index: 2;
 }
