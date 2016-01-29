@@ -91,6 +91,7 @@ canvas {
 	height: 25px;
 	display: inline-block;
 	vertical-align: top;
+	margin-left: 10px;
 }
 
 .spritesheetInner {
@@ -140,8 +141,6 @@ canvas {
 
 .mapClipSurface {
 	position: relative;
-	width: 384px;
-	height: 384px;
 	overflow: hidden;
 }
 
