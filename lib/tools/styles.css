@@ -45,7 +45,7 @@ canvas {
 	height: 16px;
 	border-radius: 3px;
 	display: inline-block;
-    margin: 2px;
+	margin: 2px;
 }
 
 .panelToolbar {
@@ -59,8 +59,8 @@ canvas {
 	height: 20px;
 	margin: 2px;
 	border-radius: 3px;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 }
 
 .panelTitle {
@@ -70,7 +70,7 @@ canvas {
 	font-size: 17px;
 	font-weight: bolder;
 	vertical-align: top;
-    margin: 0 2px;
+	margin: 0 2px;
 }
 
 .panelContent {
@@ -114,7 +114,7 @@ canvas {
 	background-image: url("spritesheetCursor.png");
 	width: 34px;
 	height: 34px;
-    z-index: 10;
+	z-index: 10;
 }
 
 .paletteCanvas {
@@ -126,8 +126,8 @@ canvas {
 	height: 36px;
 	margin: 2px;
 	display: inline-block;
-    border-radius: 3px;
-    vertical-align: bottom;
+	border-radius: 3px;
+	vertical-align: bottom;
 }
 
 .paletteCellNumber {
@@ -150,5 +150,45 @@ canvas {
 	top: 0;
 	background-image: url("spritesheetGrid.png");
 	background-repeat: repeat;
-    z-index: 2;
+	z-index: 2;
+}
+
+.mapSettings {
+	position: absolute;
+	top: 50px;
+	left: 3px;
+	width: 385px;
+	height: 385px;
+	background-color: rgba(250,250,250,0.9);
+	border-radius: 2px;
+	z-index: 10;
+	text-align: center;
+}
+
+.mapSettingsTitle {
+	margin-top: 10px;
+	font-weight: bolder;
+}
+
+.mapInput {
+	margin: 8px;
+	border-radius: 8px;
+	padding: 4px;
+	text-align: center;
+	font-weight: bolder;
+	font-size: 16px;
+}
+
+.mapSizeInput {
+	width: 70px;
+}
+
+.mapSettingsButton {
+	border-radius: 6px;
+	width: 100px;
+	height: 30px;
+	background-color: #FF2;
+	margin: 10px;
+    display: inline-block;
+	box-shadow: 0px 0px 10px #333;
 }

@@ -24,7 +24,7 @@ The application is rebuilt everytime you refresh the page in the browser.
 At the first startup, pixelbox will create a set of files and directories:
 ```
 assets/
- └── spritesheet.png
+ ├── spritesheet.png
  └── maps.json
 audio/
 build/
@@ -131,7 +131,7 @@ Tools are accessible at `http://localhost:3000/tools/`
 
 ### Map editor
 
-Draw sprites with the mouse. Hold `Shift` to erase. Hold `Ctrl` to move the map.
+Draw sprites with the mouse. Hold `Shift` to erase. Hold `Ctrl` to move around inside the map.
 
 ## Deployment
 
