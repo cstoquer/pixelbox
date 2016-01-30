@@ -87,7 +87,7 @@ canvas {
 	height: 385px;
 }
 
-.spritesheetInfos {
+.panelInfos {
 	height: 25px;
 	display: inline-block;
 	vertical-align: top;
@@ -112,8 +112,8 @@ canvas {
 	top: -4px;
 	left: -4px;
 	background-image: url("spritesheetCursor.png");
-	width: 33px;
-	height: 33px;
+	width: 34px;
+	height: 34px;
     z-index: 10;
 }
 
