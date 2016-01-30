@@ -125,9 +125,13 @@ loading and playback. You have access to its instance on `audioManager`.
 
 ## Tools
 
-Coming soon
+Tools are accessible at `http://localhost:3000/tools/`
 
 ![pixelbox_tools](https://cloud.githubusercontent.com/assets/2462139/12670965/d091a37e-c6af-11e5-8537-f82689f3496c.png)
+
+### Map editor
+
+Draw sprites with the mouse. Hold `Shift` to erase. Hold `Ctrl` to move the map.
 
 ## Deployment
 
