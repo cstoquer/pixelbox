@@ -25,6 +25,7 @@ At the first startup, pixelbox will create a set of files and directories:
 ```
 assets/
  └── spritesheet.png
+ └── maps.json
 audio/
 build/
 src/
