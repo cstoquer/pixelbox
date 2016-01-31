@@ -2,7 +2,7 @@
 	"screen": {
 		"width": 128,
 		"height": 128,
-		"pixelSize": 4
+		"pixelSize": [4, 4]
 	},
 	"palette": [
 		"#000000",
