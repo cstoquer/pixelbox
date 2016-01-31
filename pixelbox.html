@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)https://www.npmjs.com/package/pixelbox -->
+<html lang="en" class=" js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.autocomplete-container {  overflow: visible;}.autocomplete-suggestions {  border: 1px solid #999;  background: #FFF;  overflow-x: hidden;  overflow-y: auto;  cursor: default;}.autocomplete-suggestion {  padding: 2px 5px;  white-space: nowrap;  overflow: hidden;}.autocomplete-selected {  background: #F0F0F0;}.autocomplete-container strong {  font-weight: bold;}#powered-by-constructor-io {  font-size: 0.8em;  text-align:right;  background-color:rgb(255,255,192);  font-family:sans-serif;  padding: 4px 10px;  position: absolute;  border: 1px solid #999;}#constructorio-backing-node {  background-color:rgb(255,255,255);  padding: 4px 10px;  position: absolute;  border: 1px solid #FFF;}.autocomplete-suggestion-image {  float:left;  padding-right: 10px;}#autocomplete-direct-results:before {  content:'Products'}#autocomplete-search-container:before {  content:'Search Suggestions'}.autocomplete-suggestion-description {  font-size: 0.8em;  display: block;  margin-left: 10px;  line-height: 1.0em;}</style>
+  <meta charset="utf-8">
+  <title>pixelbox</title>
+
+  <link rel="stylesheet" media="all" href="styles.css">
+  <link rel="stylesheet" href="font.css">
+
+
+<style>.autocomplete-container, .autocomplete-suggestions, #powered-by-constructor-io { width: 700px !important }</style><style id="iconic-responsive-css" type="text/css">/* Iconic Responsive Support Styles */
+.iconic-property-fill, .iconic-property-text {stroke: none !important;}
+.iconic-property-stroke {fill: none !important;}
+svg.iconic.iconic-fluid {height:100% !important;width:100% !important;}
+svg.iconic.iconic-sm:not(.iconic-size-md):not(.iconic-size-lg), svg.iconic.iconic-size-sm{width:16px;height:16px;}
+svg.iconic.iconic-md:not(.iconic-size-sm):not(.iconic-size-lg), svg.iconic.iconic-size-md{width:32px;height:32px;}
+svg.iconic.iconic-lg:not(.iconic-size-sm):not(.iconic-size-md), svg.iconic.iconic-size-lg{width:128px;height:128px;}
+svg.iconic-sm > g.iconic-md, svg.iconic-sm > g.iconic-lg, svg.iconic-md > g.iconic-sm, svg.iconic-md > g.iconic-lg, svg.iconic-lg > g.iconic-sm, svg.iconic-lg > g.iconic-md {display: none;}
+svg.iconic.iconic-icon-sm > g.iconic-lg, svg.iconic.iconic-icon-md > g.iconic-lg {display:none;}
+svg.iconic-sm:not(.iconic-icon-md):not(.iconic-icon-lg) > g.iconic-sm, svg.iconic-md.iconic-icon-sm > g.iconic-sm, svg.iconic-lg.iconic-icon-sm > g.iconic-sm {display:inline;}
+svg.iconic-md:not(.iconic-icon-sm):not(.iconic-icon-lg) > g.iconic-md, svg.iconic-sm.iconic-icon-md > g.iconic-md, svg.iconic-lg.iconic-icon-md > g.iconic-md {display:inline;}
+svg.iconic-lg:not(.iconic-icon-sm):not(.iconic-icon-md) > g.iconic-lg, svg.iconic-sm.iconic-icon-lg > g.iconic-lg, svg.iconic-md.iconic-icon-lg > g.iconic-lg {display:inline;}</style></head>
+
+<body>
+
+    <div class="container content">
+      
+<div class="content-column">
+
+  <h1 class="package-name">
+      
+    <a href="https://github.com/cstoquer/pixelbox" class="active"><p><img src="https://cloud.githubusercontent.com/assets/2462139/12671050/6c0da564-c6b0-11e5-8a07-1380b8dddfaf.png"></p></a>
+  </h1>
+  <p class="package-description">A sandbox framework to fast-prototype pixel-based games</p>
+
+  <div id="readme" class="markdown">
+<p class="package-description-redundant">A sandbox framework to fast-prototype pixel-based games.</p>
+<p class="badge-only"><a href="https://nodei.co/npm/pixelbox/"><img src="https://nodei.co/npm/pixelbox.png?downloads=true" class="badge"></a></p>
+<p>Pixelbox is pretty much inspired by <a href="http://www.lexaloffle.com/pico-8.php">PICO8</a></p>
+<h2 id="user-content-install" class="deep-link"><a href="#install">Install</a></h2>
+<p><code>npm install -g pixelbox</code></p>
+<h2 id="user-content-use" class="deep-link"><a href="#use">Use</a></h2>
+<p>Inside your new game project directory:</p>
+<p><code>pixelbox</code></p>
+<p>Pixelbox create a local server on port 3000 where your game is made available.
+Just go to <code>http://localhost:3000/</code> with your web browser.
+The application is rebuilt everytime you refresh the page in the browser.</p>
+<p>At the first startup, pixelbox will create a set of files and directories:</p>
+<pre><code><pre class="editor editor-colors"><div class="line"><span class="text"><span>assets/</span></span></div><div class="line"><span class="text"><span>&nbsp;├──&nbsp;spritesheet.png</span></span></div><div class="line"><span class="text"><span>&nbsp;└──&nbsp;maps.json</span></span></div><div class="line"><span class="text"><span>audio/</span></span></div><div class="line"><span class="text"><span>build/</span></span></div><div class="line"><span class="text"><span>src/</span></span></div><div class="line"><span class="text"><span>&nbsp;└──&nbsp;main.js</span></span></div><div class="line"><span class="text"><span>node_modules/</span></span></div><div class="line"><span class="text"><span>index.html</span></span></div></pre></code></pre>
+<ul>
+<li><code>assets/</code> is where you put your game assets files (images, text files, JSON)</li>
+<li><code>audio/</code> is where you put sounds and music</li>
+<li><code>src/</code> is the source folder. <code>main.js</code> is the entry file of the game.</li>
+</ul>
+<h2 id="user-content-programming-with-pixelbox" class="deep-link"><a href="#programming-with-pixelbox">Programming with pixelbox</a></h2>
+<p>Pixelbox provides:</p>
+<ul>
+<li>a 128*128 pixels canvas in which you can <code>print</code> text and <code>draw</code> sprites.</li>
+<li>a transparent asset loader</li>
+<li>a keyboard inputs manager</li>
+<li>an audio manager with transparent loading system</li>
+<li>an automatic builder</li>
+</ul>
+<p>pixelbox is also built-in with the following libraries and modules:</p>
+<ul>
+<li><code>tina.js</code> tweening and animation library</li>
+<li><code>EventEmitter</code> API compatible port of Node.js' EventEmitter to the browser</li>
+<li><code>inherits</code> inheritance utility function</li>
+</ul>
+<h4 id="user-content-program-structure" class="deep-link"><a href="#program-structure">Program structure</a></h4>
+<p>Your game entry point is the <code>src/main.js</code> file.
+If you provide a <code>exports.update</code> function, pixelbox will call it every frame.</p>
+<p>Build is made using <a href="http://browserify.org/">browserify</a> which give you access
+to <code>require</code> and <code>exports</code> to easily modularize your project.
+The project is automaticaly rebuilt everytime you refresh the game page in your
+web browser.</p>
+<h4 id="user-content-assets" class="deep-link"><a href="#assets">Assets</a></h4>
+<p>Pixebox load all assets for you at startup.
+All supported files you put inside the <code>assets/</code> directory will in an object <code>assets</code>.
+The structure follow the structure of the directory. For instance, the file
+file located in <code>assets/sprites/player.png</code> will be accessible with
+<code>assets.sprites.player</code>.</p>
+<p>Supported files includes:</p>
+<ul>
+<li>images (<code>.png</code>, <code>.jpg</code>)</li>
+<li>plain text files (<code>.txt</code>)</li>
+<li>JSON formatted data (<code>.json</code>)</li>
+</ul>
+<p>You directly have access to JSON content.</p>
+<p>Because files are loaded inside <code>assets</code> object and refered wthout their extension,
+you cannot have a file and a directory with the same name inside the same directory.</p>
+<h2 id="user-content-pixelbox-api" class="deep-link"><a href="#pixelbox-api">Pixelbox API</a></h2>
+<h4 id="user-content-graphics" class="deep-link"><a href="#graphics">Graphics</a></h4>
+<ul>
+<li><code>cls()</code> clear screen</li>
+<li><code>sprite(n, x, y [,flipH [,flipV]])</code> draw sprite number <code>n</code> on screen at pixel position <code>(x, y)</code>. <code>flipH</code> and <code>flipV</code> can be used to flip sprite horizontally or vertically</li>
+<li><code>draw(image, x, y)</code> draw an image or texture on screen at pixel position <code>(x, y)</code></li>
+<li><code>spritesheet(image)</code> use image as spritesheet</li>
+<li><code>rect(x, y, w, h)</code> stroke a rectangle with pen color</li>
+<li><code>rectfill(x, y, w, h)</code> fill a rectangle with paper color</li>
+</ul>
+<h4 id="user-content-text" class="deep-link"><a href="#text">Text</a></h4>
+<ul>
+<li><code>print(text, [x, y])</code> if x, y is provided, print text at pixel position (x, y).
+else print text at cursor position.</li>
+<li><code>println(text)</code> print text and feed new line.
+When cursor reach the bottom of the screen, a vertical scroll is applied
+(just like it would happend in a terminal.)</li>
+<li><code>locate(i, j)</code> set cursor position at column i line j</li>
+<li><code>pen(colorId)</code> set text color to colorId in color palette</li>
+<li><code>paper(colorId)</code> set paper color to colorId in color palette.</li>
+</ul>
+<h4 id="user-content-controls" class="deep-link"><a href="#controls">Controls</a></h4>
+<ul>
+<li><code>btn</code> state of the buttons. available buttons are: <code>up</code>, <code>down</code>, <code>left</code>, <code>right</code>, <code>A</code>, <code>B</code></li>
+<li><code>btnp</code> if button has been pressed in current frame</li>
+<li><code>btnr</code> if button has been released in current frame</li>
+</ul>
+<h4 id="user-content-sound" class="deep-link"><a href="#sound">Sound</a></h4>
+<ul>
+<li><code>sfx('sound');</code> play the sound.mp3 file in <code>audio/</code> folder</li>
+<li><code>music('bgm');</code> play the bgm.mp3 file in loop. If another music is already playing,
+it will fade in and out to the new music. If no soundId is provided, the music stops.</li>
+</ul>
+<p><a href="https://github.com/Wizcorp/AudioManager">AudioManager</a> is the module that handle audio
+loading and playback. You have access to its instance on <code>audioManager</code>.</p>
+<h4 id="user-content-utility-functions" class="deep-link"><a href="#utility-functions">Utility functions</a></h4>
+<ul>
+<li><code>clip(value, min, max)</code> clip a value between min and max</li>
+<li><code>chr$(n)</code> return a character from code <code>n</code>.</li>
+<li><code>random(n)</code> return a random <strong>integer</strong> between 0 and n</li>
+</ul>
+<h2 id="user-content-tools" class="deep-link"><a href="#tools">Tools</a></h2>
+<p>Tools are accessible at <code>http://localhost:3000/tools/</code></p>
+<p><img src="https://cloud.githubusercontent.com/assets/2462139/12670965/d091a37e-c6af-11e5-8537-f82689f3496c.png"></p>
+<h3 id="user-content-map-editor" class="deep-link"><a href="#map-editor">Map editor</a></h3>
+<p>Draw sprites with the mouse. Hold <code>Shift</code> to erase. Hold <code>Ctrl</code> to move around inside the map.</p>
+<h2 id="user-content-deployment" class="deep-link"><a href="#deployment">Deployment</a></h2>
+<p>When your game is ready, the files you should deploy are:
+<code>assets</code>, <code>audio</code> and <code>build</code> folders along with the <code>index.html</code> file.</p>
+
+  </div>
+
+</div>
+
+</div>
+
+
+    </div>
+
+</body></html>
