@@ -20,6 +20,19 @@ canvas {
 	background-color: #AAA;
 }
 
+
+::-webkit-scrollbar {
+	width: 5px;
+	height: 0px;
+}
+::-webkit-scrollbar-thumb {
+	background-color: #777;
+	border-radius: 2px;
+}
+::-webkit-scrollbar-button {
+	display: none;
+}
+
 .panel {
 	position: absolute;
 	padding: 2px;
@@ -177,10 +190,12 @@ canvas {
 	text-align: center;
 	font-weight: bolder;
 	font-size: 16px;
+	display: block;
 }
 
 .mapSizeInput {
 	width: 70px;
+	display: inline-block;
 }
 
 .mapSettingsButton {
@@ -191,4 +206,30 @@ canvas {
 	margin: 10px;
     display: inline-block;
 	box-shadow: 0px 0px 10px #333;
+}
+
+.mapListContent {
+	width: 165px;
+	height: 600px;
+	overflow: hidden;
+	overflow-y:scroll;
+}
+
+.mapListItem {
+	width: 160px;
+	height: 20px;
+	padding: 2px;
+	border-radius: 6px;
+}
+
+.mapListItem:hover {
+    background-color: #FF2;
+}
+
+.mapListItemIndex {
+	width: 30px;
+}
+
+.mapListItemName {
+	margin-left: 8px;
 }
