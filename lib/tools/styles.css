@@ -213,7 +213,7 @@ canvas {
 
 .mapListContent {
 	width: 165px;
-	height: 600px;
+	height: 575px;
 	overflow: hidden;
 	overflow-y:scroll;
 }
