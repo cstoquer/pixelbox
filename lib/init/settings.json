@@ -4,6 +4,7 @@
 		"height": 128,
 		"pixelSize": [4, 4]
 	},
+	"spriteSize": [8, 8],
 	"palette": [
 		"#000000",
 		"#FFF1E8",
