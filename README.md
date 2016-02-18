@@ -31,6 +31,7 @@ build/
 src/
  └── main.js
 node_modules/
+settings.json
 index.html
 ```
 
@@ -85,7 +86,7 @@ you cannot have a file and a directory with the same name inside the same direct
 #### Graphics
 
  - `cls()` clear screen
- - `sprite(n, x, y [,flipH [,flipV]])` draw sprite number `n` on screen at pixel position `(x, y)`. `flipH` and `flipV` can be used to flip sprite horizontally or vertically
+ - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`. `flipH` and `flipV` can be used to flip sprite horizontally or vertically, `flipR` to add a 90 degree clockwize rotation.
  - `draw(image, x, y)` draw an image or texture on screen at pixel position `(x, y)`
  - `spritesheet(image)` use image as spritesheet
  - `rect(x, y, w, h)` stroke a rectangle with pen color
@@ -131,9 +132,18 @@ Tools are accessible at `http://localhost:3000/tools/`
 
 ### Map editor
 
-Draw sprites with the mouse. Hold `Shift` to erase. Hold `Ctrl` to move around inside the map.
+Draw sprites with the mouse. Hold `Shift` to erase. Hold `Alt` to move around inside the map.
 
 ## Deployment
 
 When your game is ready, the files you should deploy are:
-`assets`, `audio` and `build` folders along with the `index.html` file. 
+`assets`, `audio` and `build` folders along with the `index.html` file.
+
+## Settings
+
+`settings.json` file let you change pixelbox parameters:
+ - sprite size. default is 8x8 pixels
+ - pixel size. default is 4x4 pixels
+ - canvas screen size. default is 128x128 pixels
+ - color palette.
+
