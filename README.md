@@ -118,6 +118,42 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
 [AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio 
 loading and playback. You have access to its instance on `audioManager`.
 
+#### Maps
+
+Pixelbox has a built-in `Map` component. A map is a grid of sprites with a fast rendering system.
+You can create and edit maps easily with pixelbox map editor (see the Tools section bellow).
+
+##### Get map
+
+```javascript
+var map = assets.maps[0]; // get a map by its index
+var map = getMap('mapName'); // get a map by its name
+```
+
+##### Draw map on screen
+
+```javascript
+map.draw(x, y);
+draw(map, x, y);
+```
+
+##### Access map's sprites
+
+```javascript
+map.get(x, y); // returns the MapItem at position [x, y]. null if empty
+map.set(x, y, sprite, flipH, flipV, flipR, flagA, flagB); // add a sprite in the map.
+map.find(sprite, flagA, flagB); // find all map items with specified properties
+map.clear(); // reset the whole map content
+```
+
+##### Copy and clone maps
+
+```javascript
+map.copy(anotherMap); // copy anotherMap in map
+var copiedMap = map.clone(); // make a copy of map
+```
+
+
 #### Utility functions
 
  - `clip(value, min, max)` clip a value between min and max
@@ -132,7 +168,9 @@ Tools are accessible at `http://localhost:3000/tools/`
 
 ### Map editor
 
-Draw sprites with the mouse. Hold `Shift` to erase. Hold `Alt` to move around inside the map.
+ - Draw sprites with the mouse.
+ - Hold `Shift` to erase.
+ - Hold `Alt` to move around inside the map.
 
 ## Deployment
 
