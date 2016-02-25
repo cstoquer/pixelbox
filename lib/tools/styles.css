@@ -231,7 +231,7 @@ canvas {
 	margin-left: 8px;
 }
 
-#tooltip {
+.tooltip {
   display: none;
   position: absolute;
   z-index: 1;
