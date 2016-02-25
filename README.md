@@ -6,11 +6,11 @@ A sandbox framework to fast-prototype pixel-based games.
 
 Pixelbox is pretty much inspired by [PICO8](http://www.lexaloffle.com/pico-8.php)
 
-## Install
+# Install
 
 `npm install -g pixelbox`
 
-## Use
+# Use
 
 Inside your new game project directory:
 
@@ -39,7 +39,7 @@ index.html
  - `audio/` is where you put sounds and music
  - `src/` is the source folder. `main.js` is the entry file of the game.
 
-## Programming with pixelbox
+# Programming with pixelbox
 
 Pixelbox provides:
  - a 128*128 pixels canvas in which you can `print` text and `draw` sprites.
@@ -53,7 +53,7 @@ pixelbox is also built-in with the following libraries and modules:
  - `EventEmitter` API compatible port of Node.js' EventEmitter to the browser
  - `inherits` inheritance utility function
 
-#### Program structure
+### Program structure
 
 Your game entry point is the `src/main.js` file.
 If you provide a `exports.update` function, pixelbox will call it every frame.
@@ -63,7 +63,7 @@ to `require` and `exports` to easily modularize your project.
 The project is automaticaly rebuilt everytime you refresh the game page in your 
 web browser.
 
-#### Assets
+### Assets
 
 Pixebox load all assets for you at startup.
 All supported files you put inside the `assets/` directory will in an object `assets`.
@@ -81,9 +81,9 @@ You directly have access to JSON content.
 Because files are loaded inside `assets` object and refered wthout their extension,
 you cannot have a file and a directory with the same name inside the same directory.
 
-## Pixelbox API
+# Pixelbox API
 
-#### Graphics
+### Graphics
 
  - `cls()` clear screen
  - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`. `flipH` and `flipV` can be used to flip sprite horizontally or vertically, `flipR` to add a 90 degree clockwize rotation.
@@ -92,7 +92,7 @@ you cannot have a file and a directory with the same name inside the same direct
  - `rect(x, y, w, h)` stroke a rectangle with pen color
  - `rectfill(x, y, w, h)` fill a rectangle with paper color
 
-#### Text
+### Text
 
  - `print(text, [x, y])` if x, y is provided, print text at pixel position (x, y). 
 else print text at cursor position.
@@ -103,13 +103,13 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
  - `pen(colorId)` set text color to colorId in color palette
  - `paper(colorId)` set paper color to colorId in color palette.
 
-#### Controls
+### Controls
 
  - `btn` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B`
  - `btnp` if button has been pressed in current frame
  - `btnr` if button has been released in current frame
 
-#### Sound
+### Sound
 
  - `sfx('sound');` play the sound.mp3 file in `audio/` folder
  - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing,
@@ -118,66 +118,66 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
 [AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio 
 loading and playback. You have access to its instance on `audioManager`.
 
-#### Maps
+### Maps
 
 Pixelbox has a built-in `Map` component. A map is a grid of sprites with a fast rendering system.
 You can create and edit maps easily with pixelbox map editor (see the Tools section bellow).
 
-##### Get map
+#### Get map
 
 ```javascript
 var map = assets.maps[0]; // get a map by its index
 var map = getMap('mapName'); // get a map by its name
 ```
 
-##### Draw map on screen
+#### Draw map on screen
 
 ```javascript
 map.draw(x, y);
 draw(map, x, y);
 ```
 
-##### Access map's sprites
+#### Access map's sprites
 
 ```javascript
 map.get(x, y); // returns the MapItem at position [x, y]. null if empty
-map.set(x, y, sprite, flipH, flipV, flipR, flagA, flagB); // add a sprite in the map.
-map.find(sprite, flagA, flagB); // find all map items with specified properties
+map.set(x, y, sprite, flipH, flipV, flipR, flagA, flagB); // add a sprite
+map.find(sprite, flagA, flagB); // find all items with specified properties
 map.clear(); // reset the whole map content
 ```
 
-##### Copy and clone maps
+#### Copy and clone maps
 
 ```javascript
 map.copy(anotherMap); // copy anotherMap in map
-var copiedMap = map.clone(); // make a copy of map
+var mapCopy = map.clone(); // make a copy of map
 ```
 
 
-#### Utility functions
+### Utility functions
 
  - `clip(value, min, max)` clip a value between min and max
  - `chr$(n)` return a character from code `n`.
  - `random(n)` return a random **integer** between 0 and n
 
-## Tools
+# Tools
 
 Tools are accessible at `http://localhost:3000/tools/`
 
 ![pixelbox_tools](https://cloud.githubusercontent.com/assets/2462139/12670965/d091a37e-c6af-11e5-8537-f82689f3496c.png)
 
-### Map editor
+## Map editor
 
  - Draw sprites with the mouse.
  - Hold `Shift` to erase.
  - Hold `Alt` to move around inside the map.
 
-## Deployment
+# Deployment
 
 When your game is ready, the files you should deploy are:
 `assets`, `audio` and `build` folders along with the `index.html` file.
 
-## Settings
+# Settings
 
 `settings.json` file let you change pixelbox parameters:
  - sprite size. default is 8x8 pixels
