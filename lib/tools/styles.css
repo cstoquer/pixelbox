@@ -150,6 +150,13 @@ canvas {
 	position: relative;
 	overflow: hidden;
 }
+.mapClipSurface.move {
+	cursor: move;
+}
+
+.mapClipSurface.erase {
+	cursor:url(cursorEraser.png), auto;
+}
 
 .mapGrid {
 	position: absolute;
