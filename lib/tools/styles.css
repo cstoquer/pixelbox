@@ -52,6 +52,10 @@ canvas {
 	background-color: #AAA;
 }
 
+.panelHandleSelected {
+	background-color: #CC2;
+}
+
 .panelCloseButton {
 	background-color: #CCC;
 	width: 16px;
