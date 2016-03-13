@@ -231,6 +231,12 @@ canvas {
     background-color: #FF2;
 }
 
+.mapListItemDrag {
+	font-weight: bolder;
+	position: absolute;
+    background-color: #FF2;
+}
+
 .mapListItemIndex {
 	width: 20px;
 }
