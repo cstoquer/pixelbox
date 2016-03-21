@@ -170,7 +170,7 @@ Tools are accessible at `http://localhost:3000/tools/`
 
  - Draw sprites with the mouse.
  - Hold `Shift` to erase.
- - Hold `Alt` to move around inside the map.
+ - Hold `Alt` to scroll inside the map.
 
 # Deployment
 
