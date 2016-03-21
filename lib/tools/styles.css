@@ -170,6 +170,20 @@ canvas {
 	z-index: 2;
 }
 
+.mapResizeHandle {
+	position: absolute;
+	bottom: -10px;
+	right: -10px;
+	width: 20px;
+	height: 20px;
+	background-color: rgba(0,0,0,0);
+	border-radius: 10px;
+}
+.mapResizeHandle:hover {
+	background-color: #FF2;
+	box-shadow: 1px 1px 10px #333;
+}
+
 .mapSettings {
 	position: absolute;
 	top: 50px;
