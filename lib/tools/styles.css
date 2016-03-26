@@ -17,7 +17,6 @@ canvas {
 	image-rendering: optimize-contrast;
 	image-rendering: pixelated;
 	-ms-interpolation-mode: nearest-neighbor;
-	background-color: #AAA;
 }
 
 
