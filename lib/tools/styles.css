@@ -226,11 +226,11 @@ canvas {
 	padding-top: 6px;
 }
 
-.mapListContent {
-	width: 165px;
-	height: 575px;
-	overflow: hidden;
-	overflow-y:scroll;
+.fileListItem {
+	width: 150px;
+	height: 20px;
+	padding: 2px;
+	border-radius: 6px;
 }
 
 .mapListItem {
@@ -238,6 +238,13 @@ canvas {
 	height: 20px;
 	padding: 2px;
 	border-radius: 6px;
+}
+
+.mapListContent {
+	width: 165px;
+	height: 575px;
+	overflow: hidden;
+	overflow-y:scroll;
 }
 
 .mapListItem:hover {
