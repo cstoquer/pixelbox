@@ -32,6 +32,14 @@ canvas {
 	display: none;
 }
 
+.dragItem {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	background-color: #F00;
+	pointer-events:none;
+}
+
 .panel {
 	position: absolute;
 	padding: 2px;
@@ -125,6 +133,7 @@ canvas {
 	top: -4px;
 	left: -4px;
 	z-index: 10;
+	background-color: #CCC;
 }
 
 .paletteCanvas {
