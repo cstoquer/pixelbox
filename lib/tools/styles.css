@@ -52,7 +52,7 @@ canvas {
 }
 
 .panelHandleSelected {
-	background-color: #CC2;
+	background-color: rgb(204, 199, 64);
 }
 
 .panelCloseButton {
@@ -239,6 +239,11 @@ canvas {
 	border-radius: 3px;
 	display: inline-block;
 	cursor: pointer;
+	background-image: url(iconDirClosed.png);
+}
+
+.fileListItemBtnOpen {
+	background-image: url(iconDirOpened.png);
 }
 
 .mapFileItemName {
@@ -252,11 +257,17 @@ canvas {
 	border-left: 2px solid #999;
 }
 
+.mapListNewMapBtn {
+	margin-top: -18px;
+	margin-left: 115px;
+	position: absolute;
+}
+
 .mapListItem {
-	width: 150px;
 	height: 20px;
-	padding: 2px;
-	border-radius: 6px;
+	/*padding: 2px;*/
+	margin-left: 2px;
+	border-radius: 4px;
 }
 
 .mapListContent {
@@ -277,23 +288,32 @@ canvas {
 }
 
 .mapListItemIndex {
-	width: 20px;
+	display: inline-block;
+	margin: 2px;
+	font-size: 13px;
+	vertical-align: top;
+	background-color: #CCC;
+	width: 16px;
+	text-align: center;
+	border-radius: 3px;
 }
 
 .mapListItemName {
-	margin-left: 8px;
+	width: 100px;
+	margin-left: 2px;
+	display: inline-block;
+	overflow: hidden;
 }
 
 .mapListItemCloseButton {
 	background-color: #AAA;
-	width: 16px;
-	height: 16px;
+	width: 14px;
+	height: 14px;
 	border-radius: 3px;
 	display: inline-block;
 	margin: 2px;
 	cursor: pointer;
-	position: absolute;
-	right: 16px;
+	background-image: url(iconClose.png);
 }
 
 .tooltip {
