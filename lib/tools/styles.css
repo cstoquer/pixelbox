@@ -221,7 +221,7 @@ canvas {
 	height: 30px;
 	background-color: #FF2;
 	margin-top: 80px;
-    display: inline-block;
+	display: inline-block;
 	box-shadow: 0px 0px 20px #333;
 	padding-top: 6px;
 }
@@ -231,6 +231,24 @@ canvas {
 	height: 20px;
 	padding: 2px;
 	border-radius: 6px;
+}
+
+.fileListItemBtn {
+	background-color: #AAA;
+	width: 16px;
+	height: 16px;
+	border-radius: 3px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.mapFileItemName {
+	margin-left: 2px;
+}
+
+.mapFileItemContent {
+	margin-left: 4px;
+	border-left: 1px solid #999
 }
 
 .mapListItem {
@@ -248,13 +266,13 @@ canvas {
 }
 
 .mapListItem:hover {
-    background-color: #FF2;
+	background-color: #FF2;
 }
 
 .mapListItemDrag {
 	font-weight: bolder;
 	position: absolute;
-    background-color: #FF2;
+	background-color: #FF2;
 }
 
 .mapListItemIndex {
@@ -273,18 +291,18 @@ canvas {
 	display: inline-block;
 	margin: 2px;
 	cursor: pointer;
-    position: absolute;
-    right: 16px;
+	position: absolute;
+	right: 16px;
 }
 
 .tooltip {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  background-color: #CCC;
-  color: #333;
-  padding: 1px 3px;
-  border-radius: 3px;
-  border: 2px solid #AAA;
-  font-size: 12px;
+	display: none;
+	position: absolute;
+	z-index: 1;
+	background-color: #CCC;
+	color: #333;
+	padding: 1px 3px;
+	border-radius: 3px;
+	border: 2px solid #AAA;
+	font-size: 12px;
 }
