@@ -228,8 +228,9 @@ canvas {
 
 .fileListItem {
 	width: 150px;
-	padding: 2px;
+	padding-left: 2px;
 	border-radius: 6px;
+	margin-bottom: -2px;
 }
 
 .fileListItemBtn {
@@ -239,6 +240,8 @@ canvas {
 	border-radius: 3px;
 	display: inline-block;
 	cursor: pointer;
+	vertical-align: top;
+    margin-top: 5px;
 	background-image: url(iconDirClosed.png);
 }
 
@@ -248,24 +251,34 @@ canvas {
 
 .mapFileItemName {
 	margin-left: 2px;
+	display: inline-block;
+	width: 130px;
+	overflow: hidden;
+}
+
+.mapFileItemIconImg {
+	display: inline-block;
+	background-image: url(iconFileImg.png);
+	width: 15px;
+	height: 20px;
+	vertical-align: top;
 }
 
 .mapFileItemContent {
-	margin-top: -5px;
+	margin-top: -10px;
 	padding-top: 5px;
-	margin-left: 5px;
-	border-left: 2px solid #999;
+	margin-left: 0px;
+	border-left: 3px solid #AAA;
 }
 
 .mapListNewMapBtn {
 	margin-top: -18px;
-	margin-left: 115px;
+	margin-left: 122px;
 	position: absolute;
 }
 
 .mapListItem {
 	height: 20px;
-	/*padding: 2px;*/
 	margin-left: 2px;
 	border-radius: 4px;
 }
