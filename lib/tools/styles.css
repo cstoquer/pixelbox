@@ -205,8 +205,8 @@ canvas {
 
 .mapLayerDropArea {
 	display: inline-block;
-	width: 100px;
-	height: 100px;
+	width: 45%;
+	height: 96%;
 	border: solid 5px #F00;
 	margin: 3px;
 	border-radius: 8px;
@@ -214,6 +214,10 @@ canvas {
 	background-image: url(iconBackground.png);
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
+}
+
+.mapLayerDropAreaForeground {
+	background-image: url(iconForeground.png);
 }
 
 .mapSettings {
