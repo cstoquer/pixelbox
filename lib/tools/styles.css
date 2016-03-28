@@ -34,10 +34,9 @@ canvas {
 
 .dragItem {
 	position: absolute;
-	width: 100px;
-	height: 100px;
-	background-color: #F00;
-	pointer-events:none;
+	pointer-events: none;
+	margin-top: -10px;
+	margin-left: -20px;
 }
 
 .panel {
@@ -149,6 +148,11 @@ canvas {
 	vertical-align: bottom;
 }
 
+.paletteCellDummy {
+	border: solid 5px #CCC;
+	border-radius: 7px;
+}
+
 .paletteCellNumber {
 	width: 15px;
 	height: 12px;
@@ -240,6 +244,17 @@ canvas {
 	padding-left: 2px;
 	border-radius: 6px;
 	margin-bottom: -2px;
+}
+
+.ImageListItem:hover {
+	background-color: #FF2;
+}
+
+.ImageListItemDragDummy {
+	background-color: #FF2;
+	padding: 5px;
+	border: solid 3px #CCC;
+	border-radius: 5px;
 }
 
 .fileListItemBtn {
