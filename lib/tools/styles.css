@@ -201,9 +201,19 @@ canvas {
 	top: 50px;
 	left: 3px;
 	z-index: 11;
+}
+
+.mapLayerDropArea {
+	display: inline-block;
 	width: 100px;
 	height: 100px;
-	background-color: #f00;
+	border: solid 5px #F00;
+	margin: 3px;
+	border-radius: 8px;
+	background-color: rgba(255,255,255,0.5);
+	background-image: url(iconBackground.png);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 }
 
 .mapSettings {
