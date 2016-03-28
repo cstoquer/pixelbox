@@ -174,10 +174,17 @@ canvas {
 	cursor:url(cursorEraser.png), auto;
 }
 
-.mapGrid {
+.mapCanvas {
 	position: absolute;
 	left: 0;
 	top: 0;
+}
+
+.mapGrid {
+	/*position: absolute;
+	left: 0;
+	top: 0;*/
+	pointer-events: none;
 	background-repeat: repeat;
 	z-index: 2;
 }
