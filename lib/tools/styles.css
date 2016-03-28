@@ -196,6 +196,16 @@ canvas {
 	box-shadow: 1px 1px 10px #333;
 }
 
+.mapDropAreas {
+	position: absolute;
+	top: 50px;
+	left: 3px;
+	z-index: 11;
+	width: 100px;
+	height: 100px;
+	background-color: #f00;
+}
+
 .mapSettings {
 	position: absolute;
 	top: 50px;
