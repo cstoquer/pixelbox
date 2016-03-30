@@ -208,6 +208,7 @@ canvas {
 	top: 50px;
 	left: 3px;
 	z-index: 11;
+	text-align: center;
 }
 
 .mapLayerDropArea {
