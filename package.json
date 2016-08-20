@@ -30,7 +30,8 @@
 		"pixelbox": "./bin/pixelbox"
 	},
 	"scripts": {
-		"start": "node index.js"
+		"start": "node index.js",
+		"tools": "browserify lib/tools/src/index.js -o lib/tools/build.js"
 	},
 	"dependencies": {
 		"express": "3.4.4",
