@@ -171,7 +171,7 @@ canvas {
 }
 
 .mapClipSurface.erase {
-	cursor:url(cursorEraser.png), auto;
+	cursor:url(img/cursorEraser.png), auto;
 }
 
 .mapCanvas {
@@ -219,13 +219,13 @@ canvas {
 	margin: 3px;
 	border-radius: 8px;
 	background-color: rgba(255,255,255,0.5);
-	background-image: url(iconBackground.png);
+	background-image: url(img/iconBackground.png);
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 }
 
 .mapLayerDropAreaForeground {
-	background-image: url(iconForeground.png);
+	background-image: url(img/iconForeground.png);
 }
 
 .mapSettings {
@@ -298,11 +298,11 @@ canvas {
 	cursor: pointer;
 	vertical-align: top;
     margin-top: 5px;
-	background-image: url(iconDirClosed.png);
+	background-image: url(img/iconDirClosed.png);
 }
 
 .fileListItemBtnOpen {
-	background-image: url(iconDirOpened.png);
+	background-image: url(img/iconDirOpened.png);
 }
 
 .mapFileItemName {
@@ -314,7 +314,7 @@ canvas {
 
 .mapFileItemIconImg {
 	display: inline-block;
-	background-image: url(iconFileImg.png);
+	background-image: url(img/iconFileImg.png);
 	width: 15px;
 	height: 20px;
 	vertical-align: top;
@@ -382,7 +382,7 @@ canvas {
 	display: inline-block;
 	margin: 2px;
 	cursor: pointer;
-	background-image: url(iconClose.png);
+	background-image: url(img/iconClose.png);
 }
 
 .tooltip {
