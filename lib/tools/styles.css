@@ -278,6 +278,12 @@ canvas {
 	margin-bottom: -2px;
 }
 
+.mapFolder {
+	background: rgb(204, 199, 64);
+	margin-top: 5px;
+	padding-top: 0px;
+}
+
 .ImageListItem:hover {
 	background-color: #FF2;
 }
