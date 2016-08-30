@@ -351,8 +351,8 @@ canvas {
 }
 
 .mapListContent {
-	width: 200px;
-	height: 575px;
+	/*width: 200px;*/
+	/*height: 575px;*/
 	overflow: hidden;
 	overflow-y:scroll;
 }
