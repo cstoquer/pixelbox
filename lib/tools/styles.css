@@ -272,7 +272,6 @@ canvas {
 }
 
 .fileListItem {
-	/*width: 185px;*/
 	padding-left: 2px;
 	border-radius: 6px;
 	margin-bottom: -2px;
@@ -314,7 +313,6 @@ canvas {
 .mapFileItemName {
 	margin-left: 2px;
 	display: inline-block;
-	width: 130px;
 	overflow: hidden;
 }
 
@@ -351,8 +349,6 @@ canvas {
 }
 
 .mapListContent {
-	/*width: 200px;*/
-	/*height: 575px;*/
 	overflow: hidden;
 	overflow-y:scroll;
 }
@@ -379,7 +375,6 @@ canvas {
 }
 
 .mapListItemName {
-	/*width: 140px;*/
 	margin-left: 2px;
 	display: inline-block;
 	overflow: hidden;
