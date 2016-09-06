@@ -30,6 +30,7 @@ audio/
 build/
 src/
  └── main.js
+tools/
 node_modules/
 settings.json
 index.html
@@ -166,11 +167,29 @@ Tools are accessible at `http://localhost:3000/tools/`
 
 ![pixelbox_tools](https://cloud.githubusercontent.com/assets/2462139/12670965/d091a37e-c6af-11e5-8537-f82689f3496c.png)
 
-## Map editor
+## Assets browser
+Displays assets and maps in a tree view.
+
+## Map editor window
 
  - Draw sprites with the mouse.
  - Hold `Shift` to erase.
  - Hold `Alt` to scroll inside the map.
+
+## Spritesheet window
+
+display the spritesheet used by the map currently edited in the `Map editor` window.
+Spritesheet is saved with the map. When a map is loaded, the spritesheet will be updated accordingly.
+Images from `Assets browser` window can be drag and droped in the `Spritesheet` window.
+
+From this window, you can select the sprite and its transformations flags to be used when editing the map.
+
+## Custom tools
+You can program your custom tools to be used inside the tools interface.
+Custom tool scripts goes in the `tools` folder and will appears in the `Custom tools` window.
+
+see [pixelbox-utilities](https://github.com/cstoquer/pixelbox-utilities/tree/master/tools) 
+for code examples of custom tools.
 
 # Deployment
 
