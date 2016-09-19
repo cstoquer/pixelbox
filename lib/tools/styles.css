@@ -310,13 +310,13 @@ canvas {
 	background-image: url(img/iconDirOpened.png);
 }
 
-.mapFileItemName {
+.ListItemName {
 	margin-left: 2px;
 	display: inline-block;
 	overflow: hidden;
 }
 
-.mapFileItemIcon {
+.ListItemIcon {
 	display: inline-block;
 	width: 15px;
 	height: 20px;
