@@ -2,7 +2,8 @@
 	"screen": {
 		"width": 128,
 		"height": 128,
-		"pixelSize": [4, 4]
+		"pixelSize": [4, 4],
+		"fullscreen": false
 	},
 	"spriteSize": [8, 8],
 	"palette": [
