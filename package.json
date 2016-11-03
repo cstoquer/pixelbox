@@ -13,18 +13,9 @@
 		"url": "http://github.com/cstoquer/pixelbox/issues"
 	},
 	"keywords": [
-		"jam",
-		"pico8",
-		"console",
-		"arcade",
-		"box",
-		"sandbox",
-		"prototyping",
-		"fast",
-		"canvas",
-		"prototype",
-		"pixel",
-		"game"
+		"jam", "retro", "console", "arcade",
+		"box", "sandbox", "fast", "prototyping", "prototype",
+		"canvas", "pixel", "game"
 	],
 	"bin": {
 		"pixelbox": "./bin/pixelbox"
@@ -39,7 +30,7 @@
 		"uglify-js": "2.7.3",
 		"fs-extra": "0.26.4",
 		"walk": "2.3.4",
-		"audio-manager": "0.1.16",
+		"audio-manager": "0.1.17",
 		"tina": "0.3.10"
 	},
 	"main": "index.js"
