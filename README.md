@@ -169,7 +169,7 @@ A spritesheet is an Image containing 256 sprites organized in a 16 x 16 grid
 texture.clear(); // clear texture (it become transparent)
 texture.cls(); // clear screen (the whole texture is filled with the PAPER color)
 texture.sprite(sprite, x, y, flipH, flipV, flipR); // draw a sprite from current spritesheet in the texture
-texture.draw((img, x, y, flipH, flipV, flipR); // draw an image in texture. img can also be another Texture or a Map
+texture.draw((img, x, y, flipH, flipV, flipR); // draw an image (or Texture or Map) in texture.
 texture.rect(x, y, width, height); // stroke a rectangle
 texture.rectfill(x, y, width, height); // fill a rectangle
 ```
@@ -219,7 +219,8 @@ var map = new Map(16, 16); // create a new map of 16 by 16 tiles
 map.draw(x, y);  // draw map on screen at [x, y] position
 draw(map, x, y); // idem, using the global draw function
 texture.draw(map, x, y); // draw a map in another texture
-map.setSpritesheet(spritesheet); // set spritesheet to use for this map. The whole map is redrawn when calling this function.
+map.setSpritesheet(spritesheet); // set spritesheet to use for this map.
+                                 // The whole map is redrawn when calling this function.
 ```
 
 #### Access map content
