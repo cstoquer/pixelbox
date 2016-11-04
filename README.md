@@ -4,7 +4,8 @@ A sandbox framework to fast-prototype pixel-based games.
 
 [![Install with NPM](https://nodei.co/npm/pixelbox.png?downloads=true&stars=true)](https://nodei.co/npm/pixelbox/)
 
-Pixelbox is pretty much inspired by [PICO8](http://www.lexaloffle.com/pico-8.php)
+Pixelbox is inspired by retro-computers and projects like [PICO8](http://www.lexaloffle.com/pico-8.php) 
+or [Pixel Vision 8](https://twitter.com/pixelvision8)
 
 # Install
 
@@ -38,16 +39,17 @@ index.html
 
  - `assets/` is where you put your game assets files (images, text files, JSON)
  - `audio/` is where you put sounds and music
- - `src/` is the source folder. `main.js` is the entry file of the game.
+ - `src/` is the source folder, and `main.js` is the entry file of the game.
 
 # Programming with pixelbox
 
 Pixelbox provides:
- - a 128*128 pixels canvas in which you can `print` text and `draw` sprites.
+ - a main screen canvas in which you can `print` text, `draw` sprites, etc. 
  - a transparent asset loader
  - a keyboard inputs manager
  - an audio manager with transparent loading system
  - an automatic builder
+ - some customizable tools to create and edit your game assets (tile map, sprites)
 
 pixelbox is also built-in with the following libraries and modules:
  - `tina.js` tweening and animation library
@@ -56,7 +58,7 @@ pixelbox is also built-in with the following libraries and modules:
 
 ### Program structure
 
-Your game entry point is the `src/main.js` file.
+The game entry point is the `src/main.js` file.
 If you provide a `exports.update` function, pixelbox will call it every frame.
 
 Build is made using [browserify](http://browserify.org/) which give you access
@@ -84,19 +86,25 @@ you cannot have a file and a directory with the same name inside the same direct
 
 # Pixelbox API
 
+Pixelbox expose the following methods directly on the global scope:
+
 ### Graphics
 
- - `cls()` clear screen
- - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`. `flipH` and `flipV` can be used to flip sprite horizontally or vertically, `flipR` to add a 90 degree clockwize rotation.
- - `draw(image, x, y)` draw an image or texture on screen at pixel position `(x, y)`
- - `spritesheet(image)` use image as spritesheet
- - `rect(x, y, w, h)` stroke a rectangle with pen color
- - `rectfill(x, y, w, h)` fill a rectangle with paper color
+ - `cls()` clear screen with *paper* color
+ - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`. 
+ `flipH` and `flipV` can be used to flip sprite horizontally or vertically, `flipR` adds a 90 degree clockwize rotation.
+ - `draw(image, x, y [,flipH [,flipV [, flipR]]])` draw an *Image*, *Texture* or *Map* (tile map) on screen at pixel position `(x, y)`
+ - `spritesheet(image)` change image used as default spritesheet
+ - `rect(x, y, w, h)` stroke a rectangle with *pen* color
+ - `rectfill(x, y, w, h)` fill a rectangle with *paper* color
+ - `camera(x, y)` scroll add further drawing by provided position
 
 ### Text
 
+Pixelbox has a predefined bitmap font that you can use to print text on screen or in textures.
+
  - `print(text, [x, y])` if x, y is provided, print text at pixel position (x, y). 
-else print text at cursor position.
+else print text at cursor current position.
  - `println(text)` print text and feed new line. 
 When cursor reach the bottom of the screen, a vertical scroll is applied 
 (just like it would happend in a terminal.)
@@ -116,50 +124,170 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
  - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing,
  it will fade in and out to the new music. If no soundId is provided, the music stops.
 
-[AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio 
+ [AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio 
 loading and playback. You have access to its instance on `audioManager`.
-
-### Maps
-
-Pixelbox has a built-in `Map` component. A map is a grid of sprites with a fast rendering system.
-You can create and edit maps easily with pixelbox map editor (see the Tools section bellow).
-
-#### Get map
-
-```javascript
-var map = assets.maps[0]; // get a map by its index
-var map = getMap('mapName'); // get a map by its name
-```
-
-#### Draw map on screen
-
-```javascript
-map.draw(x, y);
-draw(map, x, y);
-```
-
-#### Access map's sprites
-
-```javascript
-map.get(x, y); // returns the MapItem at position [x, y]. null if empty
-map.set(x, y, sprite, flipH, flipV, flipR, flagA, flagB); // add a sprite
-map.find(sprite, flagA, flagB); // find all items with specified properties
-map.clear(); // reset the whole map content
-```
-
-#### Copy and clone maps
-
-```javascript
-map.copy(anotherMap); // copy anotherMap in map
-var mapCopy = map.clone(); // make a copy of map
-```
-
 
 ### Utility functions
 
  - `clip(value, min, max)` clip a value between min and max
  - `chr$(n)` return a character from code `n`.
  - `random(n)` return a random **integer** between 0 and n
+ - `inherits(Child, Parent)` make class *Child* inherits from class *Parent*
+
+# Pixelbox components
+
+### Texture
+
+Texture is a basically a wrapper of an HTML canvas element that adds functionalities for Pixelbox rendering.
+
+The main screen (accessible by the global variable `$screen`) is an instance of Texture and most of its methods
+are accessible from the global scope.
+
+To create new texture, you need to require the `Texture` module:
+```javascript
+var Texture = require('Texture');
+var texture = new Texture(128, 128); // create a new texture of 128 by 128 pixels
+```
+
+#### Texture settings
+
+```javascript
+texture.resize(width, height);
+texture.setPalette(palette);
+texture.pen(colorIndex); // set PEN color index from palette (pen is used for text and stroke)
+texture.paper(colorIndex); // set PAPER color index from palette (paper is used for fill)
+texture.setSpritesheet(spritesheet); // set spritesheet used for this texture
+```
+
+A spritesheet is an Image containing 256 sprites organized in a 16 x 16 grid 
+(the size of the spritesheet depend of the sprite size you set for your game).
+
+
+#### Rendering
+
+```javascript
+texture.clear(); // clear texture (it become transparent)
+texture.cls(); // clear screen (the whole texture is filled with the PAPER color)
+texture.sprite(sprite, x, y, flipH, flipV, flipR); // draw a sprite from current spritesheet in the texture
+texture.draw((img, x, y, flipH, flipV, flipR); // draw an image in texture. img can also be another Texture or a Map
+texture.rect(x, y, width, height); // stroke a rectangle
+texture.rectfill(x, y, width, height); // fill a rectangle
+```
+
+#### Printing text
+
+```javascript
+texture.locate(i, j); // set text cursor to specified location
+texture.print(text, x, y); // print some text
+texture.println(text); // print some text and feed a new line
+```
+
+### Maps
+
+Pixelbox has a built-in `Map` (tile map) component.
+A Map consist of:
+ - A name
+ - A spritesheet. When the spritesheet is changed, the whole map will be redrawn with the new spritesheet.
+ - A grid of sprites from the spritesheet plus few flags to flip or rotate sprites.
+
+Once created, a map is rendered in one draw call only.
+
+Map can be used to reder a level made of sprites, or just to store game data.
+
+You can create maps from your game code; But usually, you will be using Pixelbox's
+tools (see the Tools section bellow) to create and manage your maps as game assets. 
+A map can then be retrived by its name with Pixelbox's `getMap` function. 
+The map can then be drawn on screen (or in another Texture), modified, copied, pasted, resized, etc.
+
+When stored in assets, the map is compressed to Pixelbox format to reduce file size.
+
+#### Get map
+
+```javascript
+var map = getMap('mapName'); // get a map by its name
+```
+
+To create new maps, you need to require the `Map` module:
+```javascript
+var Map = require('Map');
+var map = new Map(16, 16); // create a new map of 16 by 16 tiles
+```
+
+#### Draw map
+
+```javascript
+map.draw(x, y);  // draw map on screen at [x, y] position
+draw(map, x, y); // idem, using the global draw function
+texture.draw(map, x, y); // draw a map in another texture
+map.setSpritesheet(spritesheet); // set spritesheet to use for this map. The whole map is redrawn when calling this function.
+```
+
+#### Access map content
+
+```javascript
+map.get(x, y); // returns the MapItem at position [x, y]. null if empty
+map.set(x, y, sprite, flipH, flipV, flipR, flagA, flagB); // add a sprite
+map.remove(x, y); // remove sprite at position [x, y]. (set it to null)
+map.find(sprite, flagA, flagB); // find all items with specified properties
+```
+
+#### Modifying maps
+
+```javascript
+map.resize(width, height); // resize the map (size unit is tiles)
+map.clear(); // Reset the whole map content by setting all its items to null
+var mapCopy = map.copy(x, y, width, height); // copy this map to a new one.
+               // x, y, width, height can be specified to copy only a rectangular part of the map.
+map.paste(mapCopy, x, y, merge); // paste map data in the map at position offset [x, y].
+               // if 'merge' flag is set, then null tiles will not overwrite current map tile.
+```
+
+### Gamepad
+
+The `gamepad` module allow easy access to gamepads if the browser supports it.
+```javascript
+getGamepads(); // get all gamepads state
+getGamepad(id); // get gamepad state
+getAnyGamepad(); // Merge states of all gamepads and return a global gamepad state.
+```
+
+the gamepad state returned by these function works like keyboard controls:
+You get the state of each buttons, button presses and button release, plus the values of analog controls.
+
+```javascript
+var gamepad = require('gamepad'); // require the gamepad module
+var state = gamepad.getGamepad(0); // get state of gamepad id 0
+
+// buttons:
+state.btn.A; // state of A button
+state.btn.B; // state of B button
+state.btn.X; // state of X button
+state.btn.Y; // state of Y button
+state.btn.start; // state of 'start' button
+state.btn.back;  // state of 'back' button
+state.btn.up;    // directionnal pad's up button
+state.btn.down;  // directionnal pad's down button
+state.btn.left;  // directionnal pad's left button
+state.btn.right; // directionnal pad's right button
+state.btn.lb; // left bumper button
+state.btn.rb; // right bumper button
+state.btn.lt; // left trigger button
+state.btn.rt; // right trigger button
+
+// button press and release.
+// the structure is the same as state.btn but the values are true only 
+// on button press or release.
+state.btnp; // button press
+state.btnr; // button release
+
+// analog values
+state.x  // x axe value (first stick horizontal)
+state.y  // y axe value (first stick vertical)
+state.z  // z axe value (second stick horizontal)
+state.w  // w axe value (second stick vertical)
+state.lt // left trigger analog value
+state.rt // right trigger analog value
+```
 
 # Tools
 

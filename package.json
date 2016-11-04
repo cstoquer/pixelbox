@@ -22,7 +22,8 @@
 	},
 	"scripts": {
 		"start": "node index.js",
-		"tools": "browserify lib/tools/src/index.js -o lib/tools/build.js"
+		"tools": "browserify lib/tools/src/index.js -o lib/tools/build.js",
+		"doc":   "jsdoc -c jsdoc.json -t ./doc/templates/ink-docstrap -d doc/documentation -R README.md"
 	},
 	"dependencies": {
 		"express": "3.4.4",
@@ -32,6 +33,11 @@
 		"walk": "2.3.4",
 		"audio-manager": "0.1.17",
 		"tina": "0.3.10"
+	},
+	"devDependencies": {
+		"moment": "2.14.1",
+		"sanitize-html": "1.13.0",
+		"jsdoc": "3.4.0"
 	},
 	"main": "index.js"
 }
