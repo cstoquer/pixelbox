@@ -3,7 +3,9 @@
 		"width": 128,
 		"height": 128,
 		"pixelSize": [4, 4],
-		"fullscreen": false
+		"fullscreen": false,
+		"touchEvent": false,
+		"multiTouch": false
 	},
 	"spriteSize": [8, 8],
 	"palette": [
