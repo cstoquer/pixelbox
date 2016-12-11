@@ -3,11 +3,11 @@
 		"width": 128,
 		"height": 128,
 		"pixelSize": [4, 4],
-		"fullscreen": false,
-		"touchEvent": false,
-		"multiTouch": false
+		"fullscreen": false
 	},
+
 	"spriteSize": [8, 8],
+
 	"palette": [
 		"#000000",
 		"#FFF1E8",
@@ -26,6 +26,7 @@
 		"#1D2B53",
 		"#FF004D"
 	],
+
 	"controls": {
 		"up": 38,
 		"down": 40,
@@ -33,5 +34,11 @@
 		"right": 39,
 		"A": 32,
 		"B": 88
+	},
+
+	"touchEvent": {
+		"multiTouch": false,
+		"disableContextMenu": false,
+		"hideMousePointer": false
 	}
 }
