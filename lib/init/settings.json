@@ -6,7 +6,7 @@
 		"fullscreen": false
 	},
 
-	"spriteSize": [8, 8],
+	"tileSize": [8, 8],
 
 	"palette": [
 		"#000000",
