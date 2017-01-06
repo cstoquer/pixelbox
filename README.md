@@ -1,6 +1,6 @@
 ![pixelbox](https://cloud.githubusercontent.com/assets/2462139/12671050/6c0da564-c6b0-11e5-8a07-1380b8dddfaf.png)
 
-A sandbox framework to fast-prototype pixel-based games.
+A sandbox framework to fast-prototype tile-based games.
 
 [![Install with NPM](https://nodei.co/npm/pixelbox.png?downloads=true&stars=true)](https://nodei.co/npm/pixelbox/)
 
@@ -25,7 +25,7 @@ The application is rebuilt everytime you refresh the page in the browser.
 At the first startup, pixelbox will create a set of files and directories:
 ```
 assets/
- ├── spritesheet.png
+ ├── tilesheet.png
  └── maps.json
 audio/
 build/
@@ -44,7 +44,7 @@ index.html
 # Programming with pixelbox
 
 Pixelbox provides:
- - a main screen canvas in which you can `print` text, `draw` sprites, etc. 
+ - a main screen canvas in which you can `print` text, `draw` tiles, sprites or images. 
  - a transparent asset loader
  - a keyboard inputs manager
  - an audio manager with transparent loading system
@@ -94,7 +94,7 @@ Pixelbox expose the following methods directly on the global scope:
  - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`. 
  `flipH` and `flipV` can be used to flip sprite horizontally or vertically, `flipR` adds a 90 degree clockwize rotation.
  - `draw(image, x, y [,flipH [,flipV [, flipR]]])` draw an *Image*, *Texture* or *Map* (tile map) on screen at pixel position `(x, y)`
- - `spritesheet(image)` change image used as default spritesheet
+ - `tilesheet(image)` change image used as default tilesheet
  - `rect(x, y, w, h)` stroke a rectangle with *pen* color
  - `rectfill(x, y, w, h)` fill a rectangle with *paper* color
  - `camera(x, y)` scroll add further drawing by provided position
@@ -156,11 +156,11 @@ texture.resize(width, height);
 texture.setPalette(palette);
 texture.pen(colorIndex); // set PEN color index from palette (pen is used for text and stroke)
 texture.paper(colorIndex); // set PAPER color index from palette (paper is used for fill)
-texture.setSpritesheet(spritesheet); // set spritesheet used for this texture
+texture.setTilesheet(tilesheet); // set tilesheet used for this texture
 ```
 
-A spritesheet is an Image containing 256 sprites organized in a 16 x 16 grid 
-(the size of the spritesheet depend of the sprite size you set for your game).
+A tilesheet is an Image containing 256 sprites organized in a 16 x 16 grid 
+(the size of the tilesheet depend of the sprite size you set for your game).
 
 
 #### Rendering
@@ -168,7 +168,7 @@ A spritesheet is an Image containing 256 sprites organized in a 16 x 16 grid
 ```javascript
 texture.clear(); // clear texture (it become transparent)
 texture.cls(); // clear screen (the whole texture is filled with the PAPER color)
-texture.sprite(sprite, x, y, flipH, flipV, flipR); // draw a sprite from current spritesheet in the texture
+texture.sprite(sprite, x, y, flipH, flipV, flipR); // draw a sprite from current tilesheet in the texture
 texture.draw((img, x, y, flipH, flipV, flipR); // draw an image (or Texture or Map) in texture.
 texture.rect(x, y, width, height); // stroke a rectangle
 texture.rectfill(x, y, width, height); // fill a rectangle
@@ -187,8 +187,8 @@ texture.println(text); // print some text and feed a new line
 Pixelbox has a built-in `Map` (tile map) component.
 A Map consist of:
  - A name
- - A spritesheet. When the spritesheet is changed, the whole map will be redrawn with the new spritesheet.
- - A grid of sprites from the spritesheet plus few flags to flip or rotate sprites.
+ - A tilesheet. When the tilesheet is changed, the whole map will be redrawn with the new tilesheet.
+ - A grid of sprites from the tilesheet plus few flags to flip or rotate sprites.
 
 Once created, a map is rendered in one draw call only.
 
@@ -219,24 +219,24 @@ var map = new Map(16, 16); // create a new map of 16 by 16 tiles
 map.draw(x, y);  // draw map on screen at [x, y] position
 draw(map, x, y); // idem, using the global draw function
 texture.draw(map, x, y); // draw a map in another texture
-map.setSpritesheet(spritesheet); // set spritesheet to use for this map.
-                                 // The whole map is redrawn when calling this function.
+map.setTilesheet(tilesheet); // set tilesheet to use for this map.
+                             // The whole map is redrawn when calling this function.
 ```
 
 #### Access map content
 
 ```javascript
-map.get(x, y); // returns the MapItem at position [x, y]. null if empty
-map.set(x, y, sprite, flipH, flipV, flipR, flagA, flagB); // add a sprite
-map.remove(x, y); // remove sprite at position [x, y]. (set it to null)
-map.find(sprite, flagA, flagB); // find all items with specified properties
+map.get(x, y); // returns the Tile at position [x, y]. null if empty
+map.set(x, y, tile, flipH, flipV, flipR, flagA, flagB); // add a tile
+map.remove(x, y); // remove tile at position [x, y]. (set it to null)
+map.find(tile, flagA, flagB); // find all tiles with specified properties
 ```
 
 #### Modifying maps
 
 ```javascript
 map.resize(width, height); // resize the map (size unit is tiles)
-map.clear(); // Reset the whole map content by setting all its items to null
+map.clear(); // Reset the whole map content by setting all its tiles to null
 var mapCopy = map.copy(x, y, width, height); // copy this map to a new one.
                // x, y, width, height can be specified to copy only a rectangular part of the map.
 map.paste(mapCopy, x, y, merge); // paste map data in the map at position offset [x, y].
@@ -301,17 +301,17 @@ Displays assets and maps in a tree view.
 
 ## Map editor window
 
- - Draw sprites with the mouse.
- - Hold `Shift` to erase.
- - Hold `Alt` to scroll inside the map.
+ - Draw tiles with mouse left click.
+ - Erase tiles with mouse right click.
+ - Scroll inside the map with the mouse middle click.
 
-## Spritesheet window
+## Tilesheet window
 
-display the spritesheet used by the map currently edited in the `Map editor` window.
-Spritesheet is saved with the map. When a map is loaded, the spritesheet will be updated accordingly.
-Images from `Assets browser` window can be drag and droped in the `Spritesheet` window.
+display the tilesheet used by the map currently edited in the `Map editor` window.
+Tilesheet is saved with the map. When a map is loaded, the tilesheet will be updated accordingly.
+Images from `Assets browser` window can be drag and droped in the `Tilesheet` window.
 
-From this window, you can select the sprite and its transformations flags to be used when editing the map.
+From this window, you can select the tile and its transformations flags to be used when editing the map.
 
 ## Custom tools
 You can program your custom tools to be used inside the tools interface.
@@ -328,7 +328,7 @@ When your game is ready, the files you should deploy are:
 # Settings
 
 `settings.json` file let you change pixelbox parameters:
- - sprite size. default is 8x8 pixels
+ - tile size. default is 8x8 pixels
  - pixel size. default is 4x4 pixels
  - canvas screen size. default is 128x128 pixels
  - color palette.
