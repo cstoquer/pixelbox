@@ -40,5 +40,12 @@
 		"multiTouch": false,
 		"disableContextMenu": false,
 		"hideMousePointer": false
+	},
+
+	"loaderColors": [0, 1],
+
+	"components": {
+		"TINA": true,
+		"AudioManager": true
 	}
 }
