@@ -46,7 +46,8 @@
 	"loaderColors": [0, 1],
 
 	"components": {
-		"TINA": true,
-		"AudioManager": true
+		"pixelboxCore": true,
+		"AudioManager": true,
+		"TINA": true
 	}
 }
