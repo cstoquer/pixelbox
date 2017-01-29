@@ -47,6 +47,7 @@
 
 	"components": {
 		"pixelboxCore": true,
+		"keyboard": true,
 		"AudioManager": true,
 		"TINA": true
 	}
