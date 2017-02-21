@@ -299,13 +299,16 @@ Tools are accessible at `http://localhost:3000/tools/`
 ## Assets browser
 Displays assets and maps in a tree view.
 
-## Map editor window
+## Palette
+View current palette and color indice. Colors can be drag and droped from this panel to the map editor background.
+
+## Map editor panel
 
  - Draw tiles with mouse left click.
  - Erase tiles with mouse right click.
  - Scroll inside the map with the mouse middle click.
 
-## Tilesheet window
+## Tilesheet panel
 
 display the tilesheet used by the map currently edited in the `Map editor` window.
 Tilesheet is saved with the map. When a map is loaded, the tilesheet will be updated accordingly.
