@@ -182,35 +182,35 @@ texture.print(text, x, y); // print some text
 texture.println(text); // print some text and feed a new line
 ```
 
-### Maps
+### Tile Maps
 
-Pixelbox has a built-in `Map` (tile map) component.
-A Map consist of:
+Pixelbox has a built-in `TileMap` component.
+A TileMap consist of:
  - A name
  - A tilesheet. When the tilesheet is changed, the whole map will be redrawn with the new tilesheet.
  - A grid of sprites from the tilesheet plus few flags to flip or rotate sprites.
 
-Once created, a map is rendered in one draw call only.
+Once created, a tile map is rendered in one draw call only.
 
-Map can be used to reder a level made of sprites, or just to store game data.
+TileMap can be used to reder a level made of sprites, or just to store game data.
 
-You can create maps from your game code; But usually, you will be using Pixelbox's
+You can create tile maps from your game code; But usually, you will be using Pixelbox's
 tools (see the Tools section bellow) to create and manage your maps as game assets. 
 A map can then be retrived by its name with Pixelbox's `getMap` function. 
-The map can then be drawn on screen (or in another Texture), modified, copied, pasted, resized, etc.
+The tile map can then be drawn on screen (or in another Texture), modified, copied, pasted, resized, etc.
 
 When stored in assets, the map is compressed to Pixelbox format to reduce file size.
 
-#### Get map
+#### Get tile map
 
 ```javascript
-var map = getMap('mapName'); // get a map by its name
+var map = getMap('mapName'); // get a tile map by its name
 ```
 
 To create new maps, you need to require the `Map` module:
 ```javascript
-var Map = require('Map');
-var map = new Map(16, 16); // create a new map of 16 by 16 tiles
+var TileMap = require('TileMap');
+var map = new TileMap(16, 16); // create a new tile map of 16 by 16 tiles
 ```
 
 #### Draw map
