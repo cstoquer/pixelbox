@@ -2,6 +2,7 @@ body {
 	font-family: verdana;
 	background-color: #7F7F7F;
 	overflow: hidden;
+	cursor: default;
 
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -62,7 +63,7 @@ canvas {
 	background-color: rgb(204, 199, 64);
 }
 
-.panelCloseButton {
+.panelExpandButton {
 	background-color: #CCC;
 	width: 16px;
 	height: 16px;
@@ -70,6 +71,11 @@ canvas {
 	display: inline-block;
 	margin: 2px;
 	cursor: pointer;
+	text-align: center;
+	font-size: 17px;
+	font-weight: bolder;
+	line-height: 15px;
+	color: #AAA;
 }
 
 .panelToolbar {
@@ -302,7 +308,7 @@ canvas {
 	display: inline-block;
 	cursor: pointer;
 	vertical-align: top;
-    margin-top: 5px;
+	margin-top: 5px;
 	background-image: url(img/iconDirClosed.png);
 }
 
@@ -346,9 +352,9 @@ canvas {
 	margin-left: 2px;
 	margin-right: 4px;
 	border-radius: 4px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
 }
 
 .mapListContent {
@@ -405,4 +411,54 @@ canvas {
 	border-radius: 3px;
 	border: 2px solid #AAA;
 	font-size: 12px;
+}
+
+.menuHeader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 23px;
+	background-color: #CCC;
+	z-index: 999;
+	box-shadow: 1px 1px 6px #333;
+}
+
+.menuItem {
+	display: inline-block;
+	padding-right: 7px;
+	padding-left: 7px;
+	padding-top: 2px;
+	height: 20px;
+	border-radius: 4px;
+}
+
+.menuItem:hover {
+	background-color: #FF2;
+}
+
+.submenu {
+	position: absolute;
+	background-color: #CCC;
+    border: #999 1px solid;
+    border-radius: 4px;
+	box-shadow: 1px 1px 6px #333;
+}
+
+.submenuItem {
+	padding-right: 7px;
+	padding-left: 7px;
+	padding-top: 2px;
+	height: 20px;
+	border-radius: 4px;
+}
+
+.submenuItem:hover {
+	background-color: #FF2;
+}
+
+.submenuSeparator {
+	width: 100%;
+	height: 1px;
+	background-color: #999;
 }

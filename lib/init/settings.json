@@ -1,31 +1,21 @@
 {
+	"name": "###",
 	"screen": {
 		"width": 128,
 		"height": 128,
 		"pixelSize": [4, 4],
-		"fullscreen": false,
-		"touchEvent": false,
-		"multiTouch": false
+		"fullscreen": false
 	},
-	"spriteSize": [8, 8],
+
+	"tileSize": [8, 8],
+
 	"palette": [
-		"#000000",
-		"#FFF1E8",
-		"#008751",
-		"#AB5236",
-		"#7E2553",
-		"#5F574F",
-		"#29ADFF",
-		"#00E756",
-		"#FFA300",
-		"#FF77A8",
-		"#C2C3C7",
-		"#83769C",
-		"#FFFF27",
-		"#FFCCAA",
-		"#1D2B53",
-		"#FF004D"
+		"#000000", "#FFF1E8", "#008751", "#AB5236",
+		"#7E2553", "#5F574F", "#29ADFF", "#00E756",
+		"#FFA300", "#FF77A8", "#C2C3C7", "#83769C",
+		"#FFFF27", "#FFCCAA", "#1D2B53", "#FF004D"
 	],
+
 	"controls": {
 		"up": 38,
 		"down": 40,
@@ -33,5 +23,20 @@
 		"right": 39,
 		"A": 32,
 		"B": 88
+	},
+
+	"touchEvent": {
+		"multiTouch": false,
+		"disableContextMenu": false,
+		"hideMousePointer": false
+	},
+
+	"loaderColors": [0, 1],
+
+	"components": {
+		"pixelboxCore": true,
+		"keyboard": true,
+		"AudioManager": true,
+		"TINA": true
 	}
 }
