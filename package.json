@@ -28,7 +28,7 @@
 	"dependencies": {
 		"express": "4.14.0",
 		"body-parser": "1.15.2",
-		"morgan": "1.7.0",
+		"morgan": "1.9.1",
 		"method-override": "2.3.7",
 		"browserify": "13.0.0",
 		"stringify": "5.1.0",
