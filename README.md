@@ -2,14 +2,13 @@
 
 A sandbox framework to fast-prototype tile-based games.
 
-[![Install with NPM](https://nodei.co/npm/pixelbox.png?downloads=true&stars=true)](https://nodei.co/npm/pixelbox/)
 
-Pixelbox is inspired by retro-computers and projects like [PICO8](http://www.lexaloffle.com/pico-8.php) 
-or [Pixel Vision 8](https://twitter.com/pixelvision8)
+Pixelbox takes inspiration from fantasy consoles like [PICO8](http://www.lexaloffle.com/pico-8.php)
+and game creation frameworks like Unity3D.
 
 # Install
 
-`npm install -g pixelbox`
+From version 2, Pixelbox package no longer includes the editor. Instead, the editor is now a much more easy-to-use standalone application that can be downloaded [here](https://cstoquer.itch.io/pixelbox).
 
 # Use
 
@@ -22,7 +21,7 @@ Just go to `http://localhost:3000/` with your web browser.
 The application is rebuilt everytime you refresh the page in the browser.
 
 
-At the first startup, pixelbox will create a set of files and directories:
+A Pixelbox project have the following structure:
 ```
 assets/
  ├── tilesheet.png
@@ -33,37 +32,32 @@ src/
  └── main.js
 tools/
 node_modules/
-settings.json
+project.pixelbox
+package.json
 index.html
 ```
 
  - `assets/` is where you put your game assets files (images, text files, JSON)
  - `audio/` is where you put sounds and music
- - `src/` is the source folder, and `main.js` is the entry file of the game.
+ - `src/` is the source code folder, and `main.js` is the entry file of the game.
 
 # Programming with pixelbox
 
 Pixelbox provides:
- - a main screen canvas in which you can `print` text, `draw` tiles, sprites or images. 
- - a transparent asset loader
- - a keyboard inputs manager
- - an audio manager with transparent loading system
- - an automatic builder
- - some customizable tools to create and edit your game assets (tile map, sprites)
+ - A main screen canvas in which you can `print` text, `draw` tiles, sprites or images.
+ - Automatic asset map generator and loader
+ - Keyboard/gamepads inputs manager
+ - Audio manager with automatic loading system
 
-pixelbox is also built-in with the following libraries and modules:
- - `tina.js` tweening and animation library
- - `EventEmitter` API compatible port of Node.js' EventEmitter to the browser
- - `inherits` inheritance utility function
 
 ### Program structure
 
 The game entry point is the `src/main.js` file.
-If you provide a `exports.update` function, pixelbox will call it every frame.
+If you provide a `exports.update` function, Pixelbox will call it every frame.
 
 Build is made using [browserify](http://browserify.org/) which give you access
 to `require` and `exports` to easily modularize your project.
-The project is automaticaly rebuilt everytime you refresh the game page in your 
+The project is automaticaly rebuilt everytime you refresh the game page in your
 web browser.
 
 ### Assets
@@ -71,10 +65,10 @@ web browser.
 Pixebox load all assets for you at startup.
 All supported files you put inside the `assets/` directory will in an object `assets`.
 The structure follow the structure of the directory. For instance, the file
-file located in `assets/sprites/player.png` will be accessible with 
+file located in `assets/sprites/player.png` will be accessible with
 `assets.sprites.player`.
 
-Supported files includes: 
+Supported files includes:
  - images (`.png`, `.jpg`)
  - plain text files (`.txt`)
  - JSON formatted data (`.json`)
@@ -91,7 +85,7 @@ Pixelbox expose the following methods directly on the global scope:
 ### Graphics
 
  - `cls()` clear screen with *paper* color
- - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`. 
+ - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`.
  `flipH` and `flipV` can be used to flip sprite horizontally or vertically, `flipR` adds a 90 degree clockwize rotation.
  - `draw(image, x, y [,flipH [,flipV [, flipR]]])` draw an *Image*, *Texture* or *Map* (tile map) on screen at pixel position `(x, y)`
  - `tilesheet(image)` change image used as default tilesheet
@@ -103,10 +97,10 @@ Pixelbox expose the following methods directly on the global scope:
 
 Pixelbox has a predefined bitmap font that you can use to print text on screen or in textures.
 
- - `print(text, [x, y])` if x, y is provided, print text at pixel position (x, y). 
+ - `print(text, [x, y])` if x, y is provided, print text at pixel position (x, y).
 else print text at cursor current position.
- - `println(text)` print text and feed new line. 
-When cursor reach the bottom of the screen, a vertical scroll is applied 
+ - `println(text)` print text and feed new line.
+When cursor reach the bottom of the screen, a vertical scroll is applied
 (just like it would happend in a terminal.)
  - `locate(i, j)` set cursor position at column i line j
  - `pen(colorId)` set text color to colorId in color palette
@@ -124,12 +118,12 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
  - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing,
  it will fade in and out to the new music. If no soundId is provided, the music stops.
 
- [AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio 
+ [AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio
 loading and playback. You have access to its instance on `audioManager`.
 
 ### Utility functions
 
- - `clip(value, min, max)` clip a value between min and max
+ - `clamp(value, min, max)` clip a value between min and max
  - `chr$(n)` return a character from code `n`.
  - `random(n)` return a random **integer** between 0 and n
  - `inherits(Child, Parent)` make class *Child* inherits from class *Parent*
@@ -159,7 +153,7 @@ texture.paper(colorIndex); // set PAPER color index from palette (paper is used 
 texture.setTilesheet(tilesheet); // set tilesheet used for this texture
 ```
 
-A tilesheet is an Image containing 256 sprites organized in a 16 x 16 grid 
+A tilesheet is an Image containing 256 sprites organized in a 16 x 16 grid
 (the size of the tilesheet depend of the sprite size you set for your game).
 
 
@@ -195,8 +189,8 @@ Once created, a tile map is rendered in one draw call only.
 TileMap can be used to reder a level made of sprites, or just to store game data.
 
 You can create tile maps from your game code; But usually, you will be using Pixelbox's
-tools (see the Tools section bellow) to create and manage your maps as game assets. 
-A map can then be retrived by its name with Pixelbox's `getMap` function. 
+tools (see the Tools section bellow) to create and manage your maps as game assets.
+A map can then be retrived by its name with Pixelbox's `getMap` function.
 The tile map can then be drawn on screen (or in another Texture), modified, copied, pasted, resized, etc.
 
 When stored in assets, the map is compressed to Pixelbox format to reduce file size.
@@ -232,7 +226,7 @@ map.remove(x, y); // remove tile at position [x, y]. (set it to null)
 map.find(tile, flagA, flagB); // find all tiles with specified properties
 ```
 
-#### Modifying maps
+#### Modifying maps programatically
 
 ```javascript
 map.resize(width, height); // resize the map (size unit is tiles)
@@ -276,7 +270,7 @@ state.btn.lt; // left trigger button
 state.btn.rt; // right trigger button
 
 // button press and release.
-// the structure is the same as state.btn but the values are true only 
+// the structure is the same as state.btn but the values are true only
 // on button press or release.
 state.btnp; // button press
 state.btnr; // button release
@@ -289,50 +283,3 @@ state.w  // w axe value (second stick vertical)
 state.lt // left trigger analog value
 state.rt // right trigger analog value
 ```
-
-# Tools
-
-Tools are accessible at `http://localhost:3000/tools/`
-
-![pixelbox_tools](https://cloud.githubusercontent.com/assets/2462139/12670965/d091a37e-c6af-11e5-8537-f82689f3496c.png)
-
-## Assets browser
-Displays assets and maps in a tree view.
-
-## Palette
-View current palette and color indice. Colors can be drag and droped from this panel to the map editor background.
-
-## Map editor panel
-
- - Draw tiles with mouse left click.
- - Erase tiles with mouse right click.
- - Scroll inside the map with the mouse middle click.
-
-## Tilesheet panel
-
-display the tilesheet used by the map currently edited in the `Map editor` window.
-Tilesheet is saved with the map. When a map is loaded, the tilesheet will be updated accordingly.
-Images from `Assets browser` window can be drag and droped in the `Tilesheet` window.
-
-From this window, you can select the tile and its transformations flags to be used when editing the map.
-
-## Custom tools
-You can program your custom tools to be used inside the tools interface.
-Custom tool scripts goes in the `tools` folder and will appears in the `Custom tools` window.
-
-see [pixelbox-utilities](https://github.com/cstoquer/pixelbox-utilities/tree/master/tools) 
-for code examples of custom tools.
-
-# Deployment
-
-When your game is ready, the files you should deploy are:
-`assets`, `audio` and `build` folders along with the `index.html` file.
-
-# Settings
-
-`settings.json` file let you change pixelbox parameters:
- - tile size. default is 8x8 pixels
- - pixel size. default is 4x4 pixels
- - canvas screen size. default is 128x128 pixels
- - color palette.
-
