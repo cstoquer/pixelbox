@@ -1,4 +1,5 @@
-![pixelbox](https://cloud.githubusercontent.com/assets/2462139/12671050/6c0da564-c6b0-11e5-8a07-1380b8dddfaf.png)
+![pixelbox](https://user-images.githubusercontent.com/2462139/77128033-03381d00-6a92-11ea-9cdb-a1de6c4367c6.png)
+
 
 A sandbox framework to fast-prototype tile-based games.
 
