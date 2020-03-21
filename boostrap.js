@@ -148,8 +148,16 @@ if (__KEYBOARD__) {
 		button[key] = isPressed;
 	}
 
-	window.addEventListener('keydown', function onKeyPressed(e) { e.preventDefault(); keyChange(e.keyCode, true);  });
-	window.addEventListener('keyup',   function onKeyRelease(e) { e.preventDefault(); keyChange(e.keyCode, false); });
+	window.addEventListener('keydown', function onKeyPressed(e) {
+		e.preventDefault();
+		if (e.repeat) return;
+		keyChange(e.keyCode, true);
+	});
+
+	window.addEventListener('keyup', function onKeyRelease(e) {
+		e.preventDefault();
+		keyChange(e.keyCode, false);
+	});
 }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
