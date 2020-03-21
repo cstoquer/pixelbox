@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2016-2019 Cedric Stoquer
+* Copyright (C) 2016-2020 Cedric Stoquer
 *
 * This file is part of the Pixelbox SDK.
 *
