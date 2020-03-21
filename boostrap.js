@@ -107,14 +107,6 @@ if (__USE_AUDIO__ || __USE_BLEEPER__) {
 	};
 }
 
-// Pata tracker
-if (__USE_TRACKER__) {
-	var tracker = require('./pataTracker');
-	var trackerData = require('../../audio/songs.json');
-	tracker.loadData(trackerData);
-	window.tracker = tracker;
-}
-
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // controls
 
@@ -324,6 +316,11 @@ function onAssetsLoaded(error, assets) {
 		if (assets.bleeper) bleeper.loadProgram(assets.bleeper);
 	}
 
+	if (__USE_TRACKER__) {
+		var patatracker = window.patatracker = require('./pataTracker');
+		if (assets.patatracker) patatracker.loadData(assets.patatracker);
+	}
+
 	if (__HAS_ATLAS__) {
 		require('./spritesheet').unpackSpritesheets();
 	}
@@ -455,7 +452,7 @@ if (__CUSTOM_LOADER__) {
 	var MIDDLE     = ~~(settings.screen.height / 2);
 
 	function showProgress(load, current, count, percent) {
-		rect(CENTER - HALF_WIDTH - 2, MIDDLE - 4, HALF_WIDTH * 2 + 4, 8); // FIXME
+		rect(CENTER - HALF_WIDTH - 2, MIDDLE - 4, HALF_WIDTH * 2 + 4, 8);
 		rectf(CENTER - HALF_WIDTH, MIDDLE - 2, ~~(percent * HALF_WIDTH * 2), 4);
 		if (__USE_WEBGL__) webGL.commit();
 	}
