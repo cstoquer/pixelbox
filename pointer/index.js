@@ -1,21 +1,19 @@
 
-var settings = window.settings;
+var settings       = window.settings;
 var PIXEL_WIDTH    = ~~settings.screen.pixelSize.width;
 var PIXEL_HEIGHT   = ~~settings.screen.pixelSize.height;
+var CANVAS         = null;
 var SINGLETOUCH    = true;
-var ENABLED        = true;
 var MOUSE_ID       = 0;
-var CANVAS         = $screen.canvas;
 var TOUCH_OFFSET_X = 0;
 var TOUCH_OFFSET_Y = 0;
 
-var MOUSE_EMITTER = CANVAS;
-var TOUCH_EMITTER = CANVAS;
-
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+function getCanvas() { return CANVAS; }
+function getGlobal() { return window; }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // auto update pixel size when game is full screen
-
 if (settings.screen.fullscreen) {
 
 	var SCREEN_WIDTH  = settings.screen.width;
@@ -40,31 +38,12 @@ if (settings.screen.fullscreen) {
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
-// TODO ?
-// exports.pointer = { click: false, x: 0, y: 0, allow: true };
-
-
 // callback list
 var _events = {
-	start: { mouseEvent: null, mouseId: 'mousedown', touchEvent: null, touchId: 'touchstart' },
-	end:   { mouseEvent: null, mouseId: 'mouseup',   touchEvent: null, touchId: 'touchend' },
-	move:  { mouseEvent: null, mouseId: 'mousemove', touchEvent: null, touchId: 'touchmove' },
-	// TODO touchcancel
+	start: { emitter: getCanvas, mouseId: 'mousedown', touchId: 'touchstart' },
+	move:  { emitter: getCanvas, mouseId: 'mousemove', touchId: 'touchmove' },
+	end:   { emitter: getGlobal, mouseId: 'mouseup',   touchId: 'touchend' },
 };
-
-//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-// function createTouchEmitterProxy() {
-// 	var emitter = new EventEmitter();
-// 	var TOUCH_ID = null;
-
-// 	// rebind touch events
-// 	CANVAS.addEventListener('touchstart', function (e) {
-// 		// TODO
-// 		// emitter.emit('touchstart', e);
-// 	});
-
-// 	return emitter;
-// }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function init(target) {
@@ -84,58 +63,26 @@ function init(target) {
 
 	if (touchEventSettings.hideMousePointer) {
 		CANVAS.style.cursor = 'none';
-		// TODO other browser compatibility (use blank cursor)
 	}
 
 	if (touchEventSettings.multiTouch) {
 		SINGLETOUCH = false;
 	}
-
-	// TODO: if fullscreen is set in configuration file:
-	//  - recalculate PIXEL_WIDTH and PIXEL_HEIGHT
-	//  - TOUCH_OFFSET
-
-	// TOUCH_EMITTER = SINGLETOUCH ? createTouchEmitterProxy() : CANVAS;
-	TOUCH_EMITTER = CANVAS; // TODO
 }
 
 init();
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-// function disableContextMenu() {
-// 	CANVAS.oncontextmenu = function () {
-// 		return false;
-// 	};
-// }
-
-//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-exports.enable = function (enable) {
-	enable = !!enable;
-	if (ENABLED === enable) return;
-
-	ENABLED = enable;
-
-	if (ENABLED) {
-		if (event.mouseEvent) MOUSE_EMITTER.addEventListener(event.mouseId, event.mouseEvent);
-		if (event.touchEvent) TOUCH_EMITTER.addEventListener(event.touchId, event.touchEvent);
-	} else {
-		if (event.mouseEvent) MOUSE_EMITTER.removeEventListener(event.mouseId, event.mouseEvent);
-		if (event.touchEvent) TOUCH_EMITTER.removeEventListener(event.touchId, event.touchEvent);
-	}
-};
-
-//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function setEvent(id, cb) {
 	var event = _events[id];
 
-	if (ENABLED) {
-		if (event.mouseEvent) MOUSE_EMITTER.removeEventListener(event.mouseId, event.mouseEvent);
-		if (event.touchEvent) TOUCH_EMITTER.removeEventListener(event.touchId, event.touchEvent);
-	}
+	var emitter = event.emitter();
+
+	if (event.mouseEvent) emitter.removeEventListener(event.mouseId, event.mouseEvent);
+	if (event.touchEvent) emitter.removeEventListener(event.touchId, event.touchEvent);
 
 	event.mouseEvent = function (e) {
 		e.preventDefault();
-		// TODO: click information (which, etc.)
 		var x = e.layerX / PIXEL_WIDTH;
 		var y = e.layerY / PIXEL_HEIGHT;
 		cb(x, y, MOUSE_ID, e);
@@ -154,10 +101,8 @@ function setEvent(id, cb) {
 		}
 	};
 
-	if (ENABLED) {
-		MOUSE_EMITTER.addEventListener(event.mouseId, event.mouseEvent);
-		TOUCH_EMITTER.addEventListener(event.touchId, event.touchEvent);
-	}
+	emitter.addEventListener(event.mouseId, event.mouseEvent);
+	emitter.addEventListener(event.touchId, event.touchEvent);
 }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -175,23 +120,3 @@ exports.onScroll  = function (cb) {
 	}
 	$screen.canvas.addEventListener('wheel', onMouseScroll);
 };
-
-exports.onEnter = function (cb) {
-	// TODO
-};
-
-exports.onExit = function (cb) {
-	// TODO
-};
-
-// //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-// // optionnal / to think about
-// exports.onTap = function (cb) {
-// 	// function (x, y, touchId) { /* .. */ });
-// };
-
-// //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-// // optionnal / to think about
-// exports.onSwipe = function (cb) {
-// 	// function (swipe, touchId) { /* .. */ });
-// };

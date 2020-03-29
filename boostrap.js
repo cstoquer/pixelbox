@@ -5,7 +5,7 @@
  * @license
  * This file is part of the Pixelbox SDK.
  *
- * Copyright (C) 2016-2019 Cedric Stoquer
+ * Copyright (C) 2016-2020 Cedric Stoquer
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
