@@ -83,6 +83,7 @@ CANVAS.addEventListener('mousemove', function (e) {
 
 window.addEventListener('mouseup', function (e) {
 	e.preventDefault();
+	if (!MOUSE.pressed) return;
 	MOUSE.pressed = false;
 	MOUSE.x = ~~(e.layerX / PIXEL_WIDTH);
 	MOUSE.y = ~~(e.layerY / PIXEL_HEIGHT);
@@ -91,6 +92,7 @@ window.addEventListener('mouseup', function (e) {
 
 document.addEventListener('mouseleave', function (e) {
 	if (!MOUSE.pressed) return;
+	MOUSE.pressed = false;
 	if (onCancel) {
 		onCancel(MOUSE_ID, e)
 	} else {
