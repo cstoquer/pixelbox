@@ -45,8 +45,7 @@ Build is made using [browserify](http://browserify.org/) which give you access t
 
 ### Assets
 
-Pixebox automatically load all assets at startup, before executing the game code. All supported files you put inside the `assets/` directory will in an object `assets`. The structure follow the structure of the directory. For instance, the file file located in `assets/sprites/player.png` will be accessible with
-`assets.sprites.player`.
+Pixebox automatically load all assets at startup, before executing the game code. All supported files added inside the `assets/` directory will be available in the `assets` global object. The structure follow the structure of the directory. For instance, the file file located in `assets/sprites/player.png` will be accessible with `assets.sprites.player`.
 
 Supported files includes:
  - images (`.png`, `.jpg`)
@@ -74,27 +73,27 @@ Pixelbox expose the following methods directly on the global scope:
 
 ### Print Text
 
-Pixelbox has a predefined "minitext" bitmap font that you can use to print text on screen or in textures.
+Pixelbox has a predefined *"minitext"* bitmap font that you can use to print text on screen or in textures. *Minitext* is available by default, but can be disabled in the project settings.
 
- - `print(text, [x, y])` if x, y is provided, print text at pixel position (x, y).
+ - `print(text, [x, y])` if x, y is provided, print `text` at pixel position (`x`, `y`).
 else print text at cursor current position.
- - `println(text)` print text and feed new line.
+ - `println(text)` print `text` and feed new line.
 When cursor reach the bottom of the screen, a vertical scroll is applied
 (just like it would happend in a terminal.)
- - `locate(i, j)` set cursor position at column i line j
- - `pen(colorId)` set text color to colorId in color palette
- - `paper(colorId)` set paper color to colorId in color palette.
+ - `locate(i, j)` set cursor position at column `i` line `j`
+ - `pen(colorId)` set text color to `colorId` in color palette
+ - `paper(colorId)` set paper color to `colorId` in color palette.
 
 ### User Controls
 
- - `btn` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B` (buttons names and binding can be configured in the project settings)
+ - `btn` state of the buttons. By default, available buttons are: `up`, `down`, `left`, `right`, `A`, `B` (buttons names and binding can be configured in the project settings)
  - `btnp` if button has been pressed during current frame
  - `btnr` if button has been released during current frame
 
 ### Play Sound
 
  - `sfx('sound');` play the sound.mp3 file in `audio/` folder
- - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing, it will fade in and out to the new music. If no soundId is provided, the music stops.
+ - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing, it will cross fade to the new music. If no `soundId` is provided, the music stops.
 
  [AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio
 loading and playback. You have access to its instance on `audioManager`.
@@ -110,10 +109,9 @@ loading and playback. You have access to its instance on `audioManager`.
 
 ## Texture
 
-Texture is a basically a wrapper of an HTML canvas element that adds functionalities for Pixelbox rendering.
+Texture is a canvas that can be drawn and inside which things can be drawn. In Canvas2D mode, it is implemented with a HTML canvas. In WebGL mode, it is implemented with a GLTexture2D.
 
-The main screen (accessible by the global variable `$screen`) is an instance of Texture and most of its methods
-are accessible from the global scope.
+The main screen (accessible by the global variable `$screen`) is an instance of Texture and most of its methods are accessible from the global scope.
 
 To create new texture, you need to require the `Texture` module:
 ```javascript
@@ -260,7 +258,7 @@ state.rt // right trigger analog value
 ## PataTracker
 
 Pixelbox editor is bundled with a music tracker called *PataTracker*.
-The tracker must be enabled in the project settings. It allows playback of `json` formatted tracker files.
+The tracker player must be enabled in the project settings. Player allows to directly plays the songs in the `json` formatted tracker files.
 
 PataTracker player is exposed as a `patatracker` global variable.
 ```js
