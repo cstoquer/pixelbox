@@ -65,10 +65,10 @@ Pixelbox expose the following methods directly on the global scope:
  - `cls()` clear screen with *paper* color
  - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`.
  `flipH` and `flipV` can be used to flip sprite horizontally or vertically, `flipR` adds a 90 degree clockwize rotation.
- - `draw(image, x, y [,flipH [,flipV [, flipR]]])` draw an *Image*, *Texture* or *Map* (tile map) on screen at pixel position `(x, y)`
+ - `draw(image, x, y [,flipH [,flipV [, flipR]]])` draw an *Image*, *Texture* or *TileMap* on screen at pixel position `(x, y)`
  - `tilesheet(image)` change image used as default tilesheet
  - `rect(x, y, w, h)` stroke a rectangle with *pen* color
- - `rectfill(x, y, w, h)` fill a rectangle with *paper* color
+ - `rectf(x, y, w, h)` fill a rectangle with *paper* color
  - `camera(x, y)` scroll add further drawing by provided position
 
 ### Print Text
