@@ -1,20 +1,20 @@
 ![pixelbox](https://user-images.githubusercontent.com/2462139/77128117-527e4d80-6a92-11ea-9347-ae262e520620.png)
 
 
-### A sandbox framework to fast-prototype tile-based games.
+### A sandbox framework to fast-prototype tile-based games
 
 
 Pixelbox takes inspiration from fantasy consoles like [PICO8](http://www.lexaloffle.com/pico-8.php) and game creation frameworks like Unity3D.
 
 # Install
 
-From version 2, Pixelbox package no longer includes the editor. Instead, the editor is now a standalone application that can be downloaded [on Itch.io](https://cstoquer.itch.io/pixelbox).
+From version 2, the Pixelbox package no longer includes the editor. Instead, the editor is now a standalone application that can be downloaded [on Itch.io](https://cstoquer.itch.io/pixelbox).
 
 
 
 # Use
 
-A Pixelbox project have the following structure:
+A Pixelbox project has the following structure:
 ```
 assets/
  ├── tilesheet.png
@@ -33,83 +33,83 @@ index.html
 
  - `assets/` is where game assets go (images, text files, JSON)
  - `audio/` is where sounds and music go
- - `src/` is the source code folder, and `main.js` is the entry file of the game.
+ - `src/` is the source code folder, and `main.js` is the entry file of the game
 
 # Programming with pixelbox
 
 ### Program structure
 
-The game entry point is the `src/main.js` file. If you provide a `exports.update` function, Pixelbox will call it every frame.
+The game entry point is the `src/main.js` file. If you provide an `exports.update` function, Pixelbox will call it every frame.
 
-Build is made using [browserify](http://browserify.org/) which give you access to `require` (or `import`) and `exports` to easily modularize your project.
+Building is done using [browserify](http://browserify.org/) which gives you access to `require` (or `import`) and `exports` to easily modularize your project.
 
 ### Assets
 
-Pixebox automatically load all assets at startup, before executing the game code. All supported files added inside the `assets/` directory will be available in the `assets` global object. The structure follow the structure of the directory. For instance, the file file located in `assets/sprites/player.png` will be accessible with `assets.sprites.player`.
+Pixelbox automatically loads all assets at startup, before executing the game code. All supported files added inside the `assets/` directory will be available in the `assets` global object. The structure follows the structure of the directory. For instance, the file located in `assets/sprites/player.png` will be accessible with `assets.sprites.player`.
 
-Supported files includes:
+Supported files include:
  - images (`.png`, `.jpg`)
  - JSON formatted data (`.json`)
  - plain text files (`.txt`, `.css`, `.vert`, `.frag`)
 
-You directly have access to JSON content.
+You have direct access to the content of JSON files.
 
-Because files are loaded inside `assets` object and refered wthout their extension, you cannot have a file and a directory with the same name inside the same directory.
+Because files are loaded inside the `assets` object and refered wthout their extension, you cannot have a file and a directory with the same name inside the same directory.
 
 # Pixelbox API
 
-Pixelbox expose the following methods directly on the global scope:
+Pixelbox exposes the following methods directly on the global scope:
 
-### Draw Graphics
+### Drawing graphics
 
  - `cls()` clear screen with *paper* color
- - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`.
- `flipH` and `flipV` can be used to flip sprite horizontally or vertically, `flipR` adds a 90 degree clockwize rotation.
+ - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`
+ `flipH` and `flipV` can be used to flip sprites horizontally or vertically, `flipR` adds a 90 degree clockwise rotation
  - `draw(image, x, y [,flipH [,flipV [, flipR]]])` draw an *Image*, *Texture* or *TileMap* on screen at pixel position `(x, y)`
  - `tilesheet(image)` change image used as default tilesheet
  - `rect(x, y, w, h)` stroke a rectangle with *pen* color
  - `rectf(x, y, w, h)` fill a rectangle with *paper* color
  - `camera(x, y)` scroll add further drawing by provided position
 
-### Print Text
+### Printing text
 
 Pixelbox has a predefined *"minitext"* bitmap font that you can use to print text on screen or in textures. *Minitext* is available by default, but can be disabled in the project settings.
 
- - `print(text, [x, y])` if x, y is provided, print `text` at pixel position (`x`, `y`).
-else print text at cursor current position.
- - `println(text)` print `text` and feed new line.
-When cursor reach the bottom of the screen, a vertical scroll is applied
-(just like it would happend in a terminal.)
+ - `print(text, [x, y])` if x, y is provided, print `text` at pixel position (`x`, `y`);
+else print text at cursor current position
+ - `println(text)` print `text` and feed new line;
+when the cursor reaches the bottom of the screen, vertical scroll is applied
+(just like it would happen in a terminal)
  - `locate(i, j)` set cursor position at column `i` line `j`
  - `pen(colorId)` set text color to `colorId` in color palette
- - `paper(colorId)` set paper color to `colorId` in color palette.
+ - `paper(colorId)` set paper color to `colorId` in color palette
 
-### User Controls
+### User controls
 
- - `btn` state of the buttons. By default, available buttons are: `up`, `down`, `left`, `right`, `A`, `B` (buttons names and binding can be configured in the project settings)
- - `btnp` if button has been pressed during current frame
- - `btnr` if button has been released during current frame
+ - `btn` state of the buttons — by default, available buttons are: `up`, `down`, `left`, `right`, `A`, `B` (buttons names and binding can be configured in the project settings)
+ - `btnp` whether button has been pressed during current frame
+ - `btnr` whether button has been released during current frame
 
-### Play Sound
+### Playing sound
 
  - `sfx('sound');` play the sound.mp3 file in `audio/` folder
- - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing, it will cross fade to the new music. If no `soundId` is provided, the music stops.
+ - `music('bgm');` play the bgm.mp3 file in loop; if another music is already playing, it will cross fade to the new music; if no `soundId` is provided, music stops
 
- [AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio
+ [AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handles audio
 loading and playback. You have access to its instance on `audioManager`.
 
-### Other Utility functions
+### Other utility functions
 
  - `clamp(value, min, max)` clip a value between min and max
- - `chr$(n)` return a character from code `n`.
+ - `chr$(n)` return a character from code `n`
  - `random(n)` return a random **integer** between 0 and n
- - `inherits(Child, Parent)` make class *Child* inherits from class *Parent*
+ - `inherits(Child, Parent)` make class *Child* inherit from class *Parent*
 
 # Pixelbox components
 
 ## Texture
 
-Texture is a canvas that can be drawn and inside which things can be drawn. In Canvas2D mode, it is implemented with a HTML canvas. In WebGL mode, it is implemented with a GLTexture2D.
+Texture is a canvas that can be drawn, and inside which things can be drawn. In Canvas2D mode, it is implemented with a HTML canvas. In WebGL mode, it is implemented with a GLTexture2D.
 
 The main screen (accessible by the global variable `$screen`) is an instance of Texture and most of its methods are accessible from the global scope.
 
@@ -135,10 +135,10 @@ A tilesheet is an Image containing 256 sprites organized in a 16 x 16 grid (the 
 #### Rendering
 
 ```javascript
-texture.clear(); // clear texture (it become transparent)
+texture.clear(); // clear texture (it becomes transparent)
 texture.cls(); // clear screen (the whole texture is filled with the PAPER color)
 texture.sprite(sprite, x, y, flipH, flipV, flipR); // draw a sprite from current tilesheet in the texture
-texture.draw((img, x, y, flipH, flipV, flipR); // draw an image (or Texture or Map) in texture.
+texture.draw((img, x, y, flipH, flipV, flipR); // draw an image (or Texture or Map) in the texture
 texture.rect(x, y, width, height); // stroke a rectangle
 texture.rectfill(x, y, width, height); // fill a rectangle
 ```
@@ -156,14 +156,14 @@ texture.println(text); // print some text and feed a new line
 Pixelbox has a built-in `TileMap` component.
 A TileMap consist of:
  - A name
- - A tilesheet. When the tilesheet is changed, the whole map will be redrawn with the new tilesheet.
- - A grid of sprites from the tilesheet plus few flags to flip or rotate sprites.
+ - A tilesheet — when the tilesheet is changed, the whole map will be redrawn with the new tilesheet
+ - A grid of sprites from the tilesheet plus few flags to flip or rotate sprites
 
 Once created, a tile map is rendered in one draw call only.
 
-TileMap can be used to reder a level made of sprites, or just to store game data.
+TileMap can be used to render a level made of sprites, or just to store game data.
 
-You can create tile maps from your game code; But usually, you will be using Pixelbox's tools (see the Tools section bellow) to create and manage your maps as game assets. A map can then be retrived by its name with Pixelbox's `getMap` function. The tile map can then be drawn on screen (or in another Texture), modified, copied, pasted, resized, etc.
+You can create tile maps from your game code; But usually, you will be using Pixelbox's tools (see the Tools section below) to create and manage your maps as game assets. A map can then be retrieved by its name with Pixelbox's `getMap` function. The tile map can then be drawn on screen (or in another Texture), modified, copied, pasted, resized, etc.
 
 When stored in assets, the map is compressed to Pixelbox format to reduce file size.
 
@@ -185,8 +185,8 @@ var map = new TileMap(16, 16); // create a new tile map of 16 by 16 tiles
 map.draw(x, y);  // draw map on screen at [x, y] position
 draw(map, x, y); // idem, using the global draw function
 texture.draw(map, x, y); // draw a map in another texture
-map.setTilesheet(tilesheet); // set tilesheet to use for this map.
-                             // The whole map is redrawn when calling this function.
+map.setTilesheet(tilesheet); // set tilesheet to use for this map
+                             // The whole map is redrawn when calling this function
 ```
 
 #### Access map content
@@ -203,22 +203,22 @@ map.find(tile, flagA, flagB); // find all tiles with specified properties
 ```javascript
 map.resize(width, height); // resize the map (size unit is tiles)
 map.clear(); // Reset the whole map content by setting all its tiles to null
-var mapCopy = map.copy(x, y, width, height); // copy this map to a new one.
-               // x, y, width, height can be specified to copy only a rectangular part of the map.
-map.paste(mapCopy, x, y, merge); // paste map data in the map at position offset [x, y].
-               // if 'merge' flag is set, then null tiles will not overwrite current map tile.
+var mapCopy = map.copy(x, y, width, height); // copy this map to a new one
+               // x, y, width, height can be specified to copy only a rectangular part of the map
+map.paste(mapCopy, x, y, merge); // paste map data in the map at position offset [x, y]
+               // if 'merge' flag is set, then null tiles will not overwrite current map tile
 ```
 
 ## Gamepad
 
-The `gamepad` module allow easy access to gamepads if the browser supports it.
+The `gamepad` module allows for easy access to gamepads if the browser supports it.
 ```javascript
-getGamepads(); // get all gamepads state
+getGamepads(); // get all gamepads' state
 getGamepad(id); // get gamepad state
 getAnyGamepad(); // Merge states of all gamepads and return a global gamepad state.
 ```
 
-the gamepad state returned by these function works like keyboard controls: You get the state of each buttons, button presses and button release, plus the values of analog controls.
+The gamepad state returned by these function works like keyboard controls: You get the state of each button, button presses and button releases, plus the values of analog controls.
 
 ```javascript
 var gamepad = require('gamepad'); // require the gamepad module
@@ -266,7 +266,7 @@ patatracker.playSong(songNumber);
 patatracker.stop();
 ```
 
-Pata-Tracker automatically loads project album data (`assets/patatracker.json`). If you need to load a different album, you can do it with the following API:
+PataTracker automatically loads the project's album data (`assets/patatracker.json`). If you need to load a different album, you can do it with the following API:
 ```js
 patatracker.loadData(data);
 ```
@@ -282,7 +282,7 @@ There are several ways to play Bleeper sounds:
 If the sound is named, it is accessible on the `assets` global, and automatically added to AudioManager.
 ```js
 // from assets global
-assets.bleeper.mySound.play(volume, panoramic, pitch); // all parameters optionnals
+assets.bleeper.mySound.play(volume, panoramic, pitch); // all parameters optional
 
 // using audioManager
 sfx('mySound', volume, panoramic, pitch); // using default channel
@@ -290,7 +290,7 @@ audioManager.playSound('sfx', 'mySound', volume, panoramic, pitch);
 ```
 
 #### Using bleeper module
-Bleeper module exposes an array of all sounds defined in the program.
+The Bleeper module exposes an array of all sounds defined in the program.
 ```js
 var bleeper = require('pixelbox/bleeper');
 bleeper.sounds[3].play(volume, panoramic, pitch);
