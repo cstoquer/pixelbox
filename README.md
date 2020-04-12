@@ -1,11 +1,10 @@
 ![pixelbox](https://user-images.githubusercontent.com/2462139/77128117-527e4d80-6a92-11ea-9347-ae262e520620.png)
 
 
-A sandbox framework to fast-prototype tile-based games.
+### A sandbox framework to fast-prototype tile-based games.
 
 
-Pixelbox takes inspiration from fantasy consoles like [PICO8](http://www.lexaloffle.com/pico-8.php)
-and game creation frameworks like Unity3D.
+Pixelbox takes inspiration from fantasy consoles like [PICO8](http://www.lexaloffle.com/pico-8.php) and game creation frameworks like Unity3D.
 
 # Install
 
@@ -40,18 +39,13 @@ index.html
 
 ### Program structure
 
-The game entry point is the `src/main.js` file.
-If you provide a `exports.update` function, Pixelbox will call it every frame.
+The game entry point is the `src/main.js` file. If you provide a `exports.update` function, Pixelbox will call it every frame.
 
-Build is made using [browserify](http://browserify.org/) which give you access
-to `require` (or `import`) and `exports` to easily modularize your project.
+Build is made using [browserify](http://browserify.org/) which give you access to `require` (or `import`) and `exports` to easily modularize your project.
 
 ### Assets
 
-Pixebox automatically load all assets at startup, before executing the game code.
-All supported files you put inside the `assets/` directory will in an object `assets`.
-The structure follow the structure of the directory. For instance, the file
-file located in `assets/sprites/player.png` will be accessible with
+Pixebox automatically load all assets at startup, before executing the game code. All supported files you put inside the `assets/` directory will in an object `assets`. The structure follow the structure of the directory. For instance, the file file located in `assets/sprites/player.png` will be accessible with
 `assets.sprites.player`.
 
 Supported files includes:
@@ -61,14 +55,13 @@ Supported files includes:
 
 You directly have access to JSON content.
 
-Because files are loaded inside `assets` object and refered wthout their extension,
-you cannot have a file and a directory with the same name inside the same directory.
+Because files are loaded inside `assets` object and refered wthout their extension, you cannot have a file and a directory with the same name inside the same directory.
 
 # Pixelbox API
 
 Pixelbox expose the following methods directly on the global scope:
 
-### Graphics
+### Draw Graphics
 
  - `cls()` clear screen with *paper* color
  - `sprite(n, x, y [,flipH [,flipV [, flipR]]])` draw sprite number `n` on screen at pixel position `(x, y)`.
@@ -79,7 +72,7 @@ Pixelbox expose the following methods directly on the global scope:
  - `rectfill(x, y, w, h)` fill a rectangle with *paper* color
  - `camera(x, y)` scroll add further drawing by provided position
 
-### Text
+### Print Text
 
 Pixelbox has a predefined "minitext" bitmap font that you can use to print text on screen or in textures.
 
@@ -92,22 +85,21 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
  - `pen(colorId)` set text color to colorId in color palette
  - `paper(colorId)` set paper color to colorId in color palette.
 
-### Controls
+### User Controls
 
  - `btn` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B` (buttons names and binding can be configured in the project settings)
  - `btnp` if button has been pressed during current frame
  - `btnr` if button has been released during current frame
 
-### Sound
+### Play Sound
 
  - `sfx('sound');` play the sound.mp3 file in `audio/` folder
- - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing,
- it will fade in and out to the new music. If no soundId is provided, the music stops.
+ - `music('bgm');` play the bgm.mp3 file in loop. If another music is already playing, it will fade in and out to the new music. If no soundId is provided, the music stops.
 
  [AudioManager](https://github.com/Wizcorp/AudioManager) is the module that handle audio
 loading and playback. You have access to its instance on `audioManager`.
 
-### Utility functions
+### Other Utility functions
 
  - `clamp(value, min, max)` clip a value between min and max
  - `chr$(n)` return a character from code `n`.
@@ -116,7 +108,7 @@ loading and playback. You have access to its instance on `audioManager`.
 
 # Pixelbox components
 
-### Texture
+## Texture
 
 Texture is a basically a wrapper of an HTML canvas element that adds functionalities for Pixelbox rendering.
 
@@ -139,8 +131,7 @@ texture.paper(colorIndex); // set PAPER color index from palette (paper is used 
 texture.setTilesheet(tilesheet); // set tilesheet used for this texture
 ```
 
-A tilesheet is an Image containing 256 sprites organized in a 16 x 16 grid
-(the size of the tilesheet depend of the sprite size you set for your game).
+A tilesheet is an Image containing 256 sprites organized in a 16 x 16 grid (the size of the tilesheet depend of the sprite size you set for your game).
 
 
 #### Rendering
@@ -162,7 +153,7 @@ texture.print(text, x, y); // print some text
 texture.println(text); // print some text and feed a new line
 ```
 
-### Tile Maps
+## Tile Maps
 
 Pixelbox has a built-in `TileMap` component.
 A TileMap consist of:
@@ -174,10 +165,7 @@ Once created, a tile map is rendered in one draw call only.
 
 TileMap can be used to reder a level made of sprites, or just to store game data.
 
-You can create tile maps from your game code; But usually, you will be using Pixelbox's
-tools (see the Tools section bellow) to create and manage your maps as game assets.
-A map can then be retrived by its name with Pixelbox's `getMap` function.
-The tile map can then be drawn on screen (or in another Texture), modified, copied, pasted, resized, etc.
+You can create tile maps from your game code; But usually, you will be using Pixelbox's tools (see the Tools section bellow) to create and manage your maps as game assets. A map can then be retrived by its name with Pixelbox's `getMap` function. The tile map can then be drawn on screen (or in another Texture), modified, copied, pasted, resized, etc.
 
 When stored in assets, the map is compressed to Pixelbox format to reduce file size.
 
@@ -223,7 +211,7 @@ map.paste(mapCopy, x, y, merge); // paste map data in the map at position offset
                // if 'merge' flag is set, then null tiles will not overwrite current map tile.
 ```
 
-### Gamepad
+## Gamepad
 
 The `gamepad` module allow easy access to gamepads if the browser supports it.
 ```javascript
@@ -232,8 +220,7 @@ getGamepad(id); // get gamepad state
 getAnyGamepad(); // Merge states of all gamepads and return a global gamepad state.
 ```
 
-the gamepad state returned by these function works like keyboard controls:
-You get the state of each buttons, button presses and button release, plus the values of analog controls.
+the gamepad state returned by these function works like keyboard controls: You get the state of each buttons, button presses and button release, plus the values of analog controls.
 
 ```javascript
 var gamepad = require('gamepad'); // require the gamepad module
@@ -281,8 +268,7 @@ patatracker.playSong(songNumber);
 patatracker.stop();
 ```
 
-Pata-Tracker automatically loads project album data (`assets/patatracker.json`).
-If you need to load a different album, you can do it with the following API:
+Pata-Tracker automatically loads project album data (`assets/patatracker.json`). If you need to load a different album, you can do it with the following API:
 ```js
 patatracker.loadData(data);
 ```
@@ -294,7 +280,7 @@ Note that Bleeper depends on the *AudioManager* component.
 
 There are several ways to play Bleeper sounds:
 
-### Named sounds
+#### Named sounds
 If the sound is named, it is accessible on the `assets` global, and automatically added to AudioManager.
 ```js
 // from assets global
@@ -305,7 +291,7 @@ sfx('mySound', volume, panoramic, pitch); // using default channel
 audioManager.playSound('sfx', 'mySound', volume, panoramic, pitch);
 ```
 
-### Using bleeper module
+#### Using bleeper module
 Bleeper module exposes an array of all sounds defined in the program.
 ```js
 var bleeper = require('pixelbox/bleeper');
