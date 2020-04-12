@@ -8,7 +8,7 @@ Pixelbox takes inspiration from fantasy consoles like [PICO8](http://www.lexalof
 
 # Install
 
-From version 2, Pixelbox package no longer includes the editor. Instead, the editor is now a standalone application that can be downloaded [here](https://cstoquer.itch.io/pixelbox).
+From version 2, Pixelbox package no longer includes the editor. Instead, the editor is now a standalone application that can be downloaded [on Itch.io](https://cstoquer.itch.io/pixelbox).
 
 
 
