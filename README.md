@@ -9,23 +9,17 @@ and game creation frameworks like Unity3D.
 
 # Install
 
-From version 2, Pixelbox package no longer includes the editor. Instead, the editor is now a much more easy-to-use standalone application that can be downloaded [here](https://cstoquer.itch.io/pixelbox).
+From version 2, Pixelbox package no longer includes the editor. Instead, the editor is now a standalone application that can be downloaded [here](https://cstoquer.itch.io/pixelbox).
+
+
 
 # Use
-
-Inside your new game project directory:
-
-`pixelbox`
-
-Pixelbox create a local server on port 3000 where your game is made available.
-Just go to `http://localhost:3000/` with your web browser.
-The application is rebuilt everytime you refresh the page in the browser.
-
 
 A Pixelbox project have the following structure:
 ```
 assets/
  ├── tilesheet.png
+ ├── palette.png
  └── maps.json
 audio/
 build/
@@ -38,18 +32,11 @@ package.json
 index.html
 ```
 
- - `assets/` is where you put your game assets files (images, text files, JSON)
- - `audio/` is where you put sounds and music
+ - `assets/` is where game assets goes(images, text files, JSON)
+ - `audio/` is where sounds and music goes
  - `src/` is the source code folder, and `main.js` is the entry file of the game.
 
 # Programming with pixelbox
-
-Pixelbox provides:
- - A main screen canvas in which you can `print` text, `draw` tiles, sprites or images.
- - Automatic asset map generator and loader
- - Keyboard/gamepads inputs manager
- - Audio manager with automatic loading system
-
 
 ### Program structure
 
@@ -57,13 +44,11 @@ The game entry point is the `src/main.js` file.
 If you provide a `exports.update` function, Pixelbox will call it every frame.
 
 Build is made using [browserify](http://browserify.org/) which give you access
-to `require` and `exports` to easily modularize your project.
-The project is automaticaly rebuilt everytime you refresh the game page in your
-web browser.
+to `require` (or `import`) and `exports` to easily modularize your project.
 
 ### Assets
 
-Pixebox load all assets for you at startup.
+Pixebox automatically load all assets at startup, before executing the game code.
 All supported files you put inside the `assets/` directory will in an object `assets`.
 The structure follow the structure of the directory. For instance, the file
 file located in `assets/sprites/player.png` will be accessible with
@@ -71,8 +56,8 @@ file located in `assets/sprites/player.png` will be accessible with
 
 Supported files includes:
  - images (`.png`, `.jpg`)
- - plain text files (`.txt`)
  - JSON formatted data (`.json`)
+ - plain text files (`.txt`, `.css`, `.vert`, `.frag`)
 
 You directly have access to JSON content.
 
@@ -96,7 +81,7 @@ Pixelbox expose the following methods directly on the global scope:
 
 ### Text
 
-Pixelbox has a predefined bitmap font that you can use to print text on screen or in textures.
+Pixelbox has a predefined "minitext" bitmap font that you can use to print text on screen or in textures.
 
  - `print(text, [x, y])` if x, y is provided, print text at pixel position (x, y).
 else print text at cursor current position.
@@ -109,9 +94,9 @@ When cursor reach the bottom of the screen, a vertical scroll is applied
 
 ### Controls
 
- - `btn` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B`
- - `btnp` if button has been pressed in current frame
- - `btnr` if button has been released in current frame
+ - `btn` state of the buttons. available buttons are: `up`, `down`, `left`, `right`, `A`, `B` (buttons names and binding can be configured in the project settings)
+ - `btnp` if button has been pressed during current frame
+ - `btnr` if button has been released during current frame
 
 ### Sound
 
@@ -283,4 +268,46 @@ state.z  // z axe value (second stick horizontal)
 state.w  // w axe value (second stick vertical)
 state.lt // left trigger analog value
 state.rt // right trigger analog value
+```
+
+## PataTracker
+
+Pixelbox editor is bundled with a music tracker called *PataTracker*.
+The tracker must be enabled in the project settings. It allows playback of `json` formatted tracker files.
+
+PataTracker player is exposed as a `patatracker` global variable.
+```js
+patatracker.playSong(songNumber);
+patatracker.stop();
+```
+
+Pata-Tracker automatically loads project album data (`assets/patatracker.json`).
+If you need to load a different album, you can do it with the following API:
+```js
+patatracker.loadData(data);
+```
+
+## Bleeper
+
+Bleeper is the sound effect editor of Pixelbox. Like for PataTracker, it must be enabled in the project settings.
+Note that Bleeper depends on the *AudioManager* component.
+
+There are several ways to play Bleeper sounds:
+
+### Named sounds
+If the sound is named, it is accessible on the `assets` global, and automatically added to AudioManager.
+```js
+// from assets global
+assets.bleeper.mySound.play(volume, panoramic, pitch); // all parameters optionnals
+
+// using audioManager
+sfx('mySound', volume, panoramic, pitch); // using default channel
+audioManager.playSound('sfx', 'mySound', volume, panoramic, pitch);
+```
+
+### Using bleeper module
+Bleeper module exposes an array of all sounds defined in the program.
+```js
+var bleeper = require('pixelbox/bleeper');
+bleeper.sounds[3].play(volume, panoramic, pitch);
 ```
