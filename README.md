@@ -31,8 +31,8 @@ package.json
 index.html
 ```
 
- - `assets/` is where game assets goes(images, text files, JSON)
- - `audio/` is where sounds and music goes
+ - `assets/` is where game assets go (images, text files, JSON)
+ - `audio/` is where sounds and music go
  - `src/` is the source code folder, and `main.js` is the entry file of the game.
 
 # Programming with pixelbox
