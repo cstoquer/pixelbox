@@ -195,6 +195,11 @@ if (__USE_CORE__) {
 		if (__MINI_TEXT__) require('./Texture/textCanvas2D');
 	}
 
+	var TILE_WIDTH  = settings.tileSize.width;
+	var TILE_HEIGHT = settings.tileSize.height;
+	Texture.setTileSize(TILE_WIDTH, TILE_HEIGHT);
+	TileMap.setTileSize(TILE_WIDTH, TILE_HEIGHT);
+
 	//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 	// Texture
 
@@ -276,11 +281,6 @@ if (__USE_CORE__) {
 
 	window.getMap   = TileMap.getMap;
 	window.rectfill = window.rectf; // legacy
-
-	/*Object.defineProperty(window, 'cls', {
-		get: function () { return screen.cls(); },
-		set: function () {}
-	});*/
 
 	if (__NO_CONTEXT_MENU__) {
 		// disable browser's context menu

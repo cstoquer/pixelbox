@@ -1,7 +1,7 @@
 var Texture  = require('../Texture');
 
-var TILE_WIDTH  = ~~settings.tileSize.width;
-var TILE_HEIGHT = ~~settings.tileSize.height;
+var TILE_WIDTH  = 8;
+var TILE_HEIGHT = 8;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 /** @class Tile
@@ -259,16 +259,17 @@ TileMap.prototype.draw = function (x, y) {
 TileMap.prototype.setTilesheet = function (tilesheet) {
 	this.tilesheet = tilesheet;
 	this._tilesheetPath = tilesheet && tilesheet.path || '';
-	if (this.texture) this.texture.setTilesheet(tilesheet);
+	if (!this.texture) return this;
+	this.texture.setTilesheet(tilesheet);
 	this.redraw();
-	return this;
+	return this
 };
 
 TileMap.prototype._setTilesheetPath = function (path) {
 	this._tilesheetPath = path || '';
 	if (!path) return this.setTilesheet();
 	var pathes = path.split('/');
-	var node = window.assets || {};
+	var node = assets || {};
 	for (var i = 0; i < pathes.length; i++) {
 		node = node[pathes[i]];
 		if (!node) return console.warn('Could not find tilesheet', path);

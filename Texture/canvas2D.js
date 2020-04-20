@@ -1,8 +1,8 @@
 var Texture      = require('./index');
 var createCanvas = require('../domUtils/createCanvas');
 
-var TILE_WIDTH  = ~~settings.tileSize.width;
-var TILE_HEIGHT = ~~settings.tileSize.height;
+var TILE_WIDTH  = 8;
+var TILE_HEIGHT = 8;
 var TILES_PER_LINE = 16; // (in a tilesheet)
 var PI2 = Math.PI / 2;
 

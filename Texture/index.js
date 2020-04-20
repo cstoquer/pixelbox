@@ -41,6 +41,8 @@ Texture.prototype.palette = [
 Texture.prototype.ox = 0;
 Texture.prototype.oy = 0;
 
+Texture.setTileSize = function () { /* virtual */ }
+
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 /** Set texture palette. The charset sheet is recreated when this method is called.
  * @param {string[]} palette - palette definition. This is an array of css formated colors.
