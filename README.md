@@ -115,7 +115,7 @@ The main screen (accessible by the global variable `$screen`) is an instance of 
 
 To create new texture, you need to require the `Texture` module:
 ```javascript
-var Texture = require('Texture');
+var Texture = require('pixelbox/Texture');
 var texture = new Texture(128, 128); // create a new texture of 128 by 128 pixels
 ```
 
@@ -175,7 +175,7 @@ var map = getMap('mapName'); // get a tile map by its name
 
 To create new maps, you need to require the `Map` module:
 ```javascript
-var TileMap = require('TileMap');
+var TileMap = require('pixelbox/TileMap');
 var map = new TileMap(16, 16); // create a new tile map of 16 by 16 tiles
 ```
 
@@ -211,18 +211,16 @@ map.paste(mapCopy, x, y, merge); // paste map data in the map at position offset
 
 ## Gamepad
 
-The `gamepad` module allows for easy access to gamepads if the browser supports it.
+The `gamepad` module allows for easy access to gamepads if the browser supports it. When the gamepad feature is enabled in the project settings, you get access to these objects on the global scope:
 ```javascript
-getGamepads(); // get all gamepads' state
-getGamepad(id); // get gamepad state
-getAnyGamepad(); // Merge states of all gamepads and return a global gamepad state.
+gamepads[id]; // get gamepad state. id is a number in the range [0..4] (4 is computer keyboard)
+gamepad; // Merge states of all gamepads and return a global gamepad state.
 ```
 
-The gamepad state returned by these function works like keyboard controls: You get the state of each button, button presses and button releases, plus the values of analog controls.
+Gamepad state works like keyboard controls: You get the state of each button, button presses and button releases, plus the values of analog controls.
 
 ```javascript
-var gamepad = require('gamepad'); // require the gamepad module
-var state = gamepad.getGamepad(0); // get state of gamepad id 0
+var state = gamepads[0]; // get state of gamepad id 0
 
 // buttons:
 state.btn.A; // state of A button
