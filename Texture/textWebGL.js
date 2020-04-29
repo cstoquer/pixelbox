@@ -103,8 +103,22 @@ Texture.prototype.print = function (str, x, y) {
 	if (x !== undefined) {
 		x = ~~Math.round(x - this.camera.x);
 		y = ~~Math.round(y - this.camera.y);
+		var originX = x;
 		for (var i = 0; i < str.length; i++) {
-			// TODO
+			var chr = str.charCodeAt(i);
+			if (chr === 10 || chr === 13) {
+				y += CHAR_HEIGHT;
+				x = originX;
+				continue;
+			}
+			chr -= 32;
+			if (chr < 0 || chr > 255) {
+				x += CHAR_WIDTH;
+				continue;
+			}
+			var sx = CHAR_WIDTH  *   (chr % CHAR_PER_LINE) + OX;
+			var sy = CHAR_HEIGHT * ~~(chr / CHAR_PER_LINE) + OY;
+			renderer.pushSprite(x, y, CHAR_WIDTH, CHAR_HEIGHT, sx, sy, r, g, b);
 			x += CHAR_WIDTH;
 		}
 		return this;
