@@ -25,7 +25,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-var projectData = require('./projectData.json');
+// var projectData = require('./projectData.json');
+var projectData = __PROJECT_DATA__;
+
 // projectData.settings.buildTime = __BUILD_TIME__;
 // projectData.settings.version = __GAME_VERSION__;
 // projectData.settings.pixelboxVersion = __PIXELBOX_VERSION__;
