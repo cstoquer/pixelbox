@@ -228,6 +228,13 @@ Texture.prototype.paper = function (p) {
  * @returns {Texture} the texture itself
  */
 Texture.prototype.rect = function (x, y, w, h) {
+	if (w <= 1 || h <= 1) {
+		var fill = this.ctx.fillStyle;
+		this.ctx.fillStyle = this.ctx.strokeStyle;
+		this.ctx.fillRect(~~(x - this.camera.x), ~~(y - this.camera.y), ~~w, ~~h);
+		this.ctx.fillStyle = fill;
+		return this;
+	}
 	this.ctx.strokeRect(~~(x - this.camera.x) + 0.5, ~~(y - this.camera.y) + 0.5, ~~(w - 1), ~~(h - 1));
 	return this;
 };
