@@ -71,8 +71,8 @@ function createProgram(id, vert, frag) {
 	// register program in pool
 	if (id) programs[id] = program;
 
-	// TODO: see TREY: we use the program and construct Uniforms and Attributes
-	// (so we don't have to do gl.getAttribLocation every time)
+	// TODO: Use the program and construct Uniforms and Attributes
+	// (so we don't have to do gl.getAttribLocation each time)
 
 	return program;
 }

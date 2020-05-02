@@ -29,8 +29,6 @@ Texture.prototype._init = function () {
 	this.framebuffer = gl.createFramebuffer();
 	gl.bindFramebuffer(gl.FRAMEBUFFER, this.framebuffer);
 	gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.ctx, 0);
-
-	this.resize(this.width, this.height);
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -261,10 +259,12 @@ Texture.prototype.rectfill = Texture.prototype.rectf;
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 Texture.prototype.resize = function (width, height) {
 	if (this.width === width && this.height === height) return;
-	// TODO
+	this.width  = width;
+	this.height = height;
+	this._init();
 
 	if (this._copyTexture) {
-		// TODO: also resize the texture copy
+		this._copyTexture = null;
 	}
 };
 
