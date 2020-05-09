@@ -1,5 +1,7 @@
 var context  = require('./context');
 var batcher  = require('./batcher');
+var pixelbox = require('..');
+var settings = pixelbox.settings;
 
 var gl = context.gl;
 var INT16_SIZE   = 2; // byte
@@ -8,7 +10,6 @@ var VERTEX_SIZE  = 4; // 2 positions + 2 uv
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // create a vertex buffer with one quad that covers the full screen
-
 var W = ~~settings.screen.width;
 var H = ~~settings.screen.height;
 
@@ -56,7 +57,7 @@ function commit() {
 	gl.uniform2f(gl.getUniformLocation(program, 'iResolution'), W, H); // TODO: should be size of the main canvas (if upscaling)
 	gl.vertexAttribPointer(enableAttribute(program, 'a_coordinates'), 2, gl.SHORT, false, INT16_SIZE * VERTEX_SIZE, 0);
 	gl.vertexAttribPointer(enableAttribute(program, 'a_uv'),          2, gl.SHORT, false, INT16_SIZE * VERTEX_SIZE, INT16_SIZE * 2);
-	bindChannel(program, $screen, 'iChannel0', 0);
+	bindChannel(program, pixelbox.$screen, 'iChannel0', 0);
 
 	gl.drawArrays(gl.TRIANGLES, 0, 6);
 }

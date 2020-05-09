@@ -1,12 +1,14 @@
-var Texture        = require('./index.js');
-var context        = require('../webGL/context');
-var batcher        = require('../webGL/batcher');
-var gl             = context.gl;
-var renderers      = batcher.renderers;
+var Texture   = require('./index.js');
+var context   = require('../webGL/context');
+var batcher   = require('../webGL/batcher');
+var gl        = context.gl;
+var renderers = batcher.renderers;
+var pixelbox  = require('..');
+var settings  = pixelbox.settings;
 
-var TILE_WIDTH      = ~~settings.tileSize.width;
-var TILE_HEIGHT     = ~~settings.tileSize.height;
-var TILES_PER_LINE  = 16;                         // (in a tilesheet)
+var TILE_WIDTH     = ~~settings.tileSize.width;
+var TILE_HEIGHT    = ~~settings.tileSize.height;
+var TILES_PER_LINE = 16;                         // (in a tilesheet)
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 Texture.prototype._init = function () {
@@ -236,13 +238,15 @@ Texture.prototype.rect = function (x, y, w, h) {
 
 	if (w <= 2 || h <= 2) {
 		renderer.pushRect(x, y, w, h, color.r, color.g, color.b);
-		return;
+		return this;
 	}
 
 	renderer.pushRect(x,         y,         w, 1, color.r, color.g, color.b);
 	renderer.pushRect(x,         y + h - 1, w, 1, color.r, color.g, color.b);
 	renderer.pushRect(x,         y,         1, h, color.r, color.g, color.b);
 	renderer.pushRect(x + w - 1, y,         1, h, color.r, color.g, color.b);
+
+	return this;
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -252,13 +256,15 @@ Texture.prototype.rectf = function (x, y, w, h) {
 	batcher
 		.prepare(renderers.color, null, this)
 		.pushRect(x, y, w, h, color.r, color.g, color.b);
+
+	return this;
 };
 
 Texture.prototype.rectfill = Texture.prototype.rectf;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 Texture.prototype.resize = function (width, height) {
-	if (this.width === width && this.height === height) return;
+	if (this.width === width && this.height === height) return this;
 	this.width  = width;
 	this.height = height;
 	this._init();
@@ -266,6 +272,8 @@ Texture.prototype.resize = function (width, height) {
 	if (this._copyTexture) {
 		this._copyTexture = null;
 	}
+
+	return this;
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄

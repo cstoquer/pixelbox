@@ -140,7 +140,7 @@ texture.cls(); // clear screen (the whole texture is filled with the PAPER color
 texture.sprite(sprite, x, y, flipH, flipV, flipR); // draw a sprite from current tilesheet in the texture
 texture.draw((img, x, y, flipH, flipV, flipR); // draw an image (or Texture or Map) in the texture
 texture.rect(x, y, width, height); // stroke a rectangle
-texture.rectfill(x, y, width, height); // fill a rectangle
+texture.rectf(x, y, width, height); // fill a rectangle
 ```
 
 #### Printing text

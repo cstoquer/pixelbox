@@ -1,5 +1,6 @@
-var domUtils     = require('../domUtils');
 var createCanvas = require('../domUtils/createCanvas');
+var pixelbox     = require('..');
+var settings     = pixelbox.settings;
 
 var SCREEN_WIDTH  = settings.screen.width;
 var SCREEN_HEIGHT = settings.screen.height;

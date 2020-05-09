@@ -1,4 +1,5 @@
 var Texture  = require('../Texture');
+var pixelbox = require('..');
 
 var TILE_WIDTH  = 8;
 var TILE_HEIGHT = 8;
@@ -269,7 +270,7 @@ TileMap.prototype._setTilesheetPath = function (path) {
 	this._tilesheetPath = path || '';
 	if (!path) return this.setTilesheet();
 	var pathes = path.split('/');
-	var node = assets || {};
+	var node = pixelbox.assets || {};
 	for (var i = 0; i < pathes.length; i++) {
 		node = node[pathes[i]];
 		if (!node) return console.warn('Could not find tilesheet', path);

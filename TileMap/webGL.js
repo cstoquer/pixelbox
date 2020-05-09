@@ -1,6 +1,8 @@
-var TileMap        = require('./index.js');
-var Texture        = require('../Texture'); // webGL Texture
-var batcher        = require('../webGL/batcher');
+var TileMap  = require('./index.js');
+var Texture  = require('../Texture');       // webGL Texture
+var batcher  = require('../webGL/batcher');
+var pixelbox = require('..');
+var settings = pixelbox.settings;
 
 var TILE_WIDTH      = settings.tileSize.width;
 var TILE_HEIGHT     = settings.tileSize.height;
@@ -30,7 +32,7 @@ TileMap.prototype.redraw = function () { /* NOP */ };
  * NOTE: By overwriting draw, we prevent TileMap to create a Texture instance
  */
 TileMap.prototype.draw = function (px, py, flipH, flipV, flipR) {
-	this._draw(px, py, flipH, flipV, flipR, $screen);
+	this._draw(px, py, flipH, flipV, flipR, pixelbox.$screen);
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -38,7 +40,7 @@ TileMap.prototype._draw = function (px, py, flipH, flipV, flipR, renderTarget) {
 	var image = this.tilesheet || Texture.prototype.tilesheet;
 	var renderer = batcher.prepare(SPRITE_RENDERER, image, renderTarget);
 
-	var camera = $screen.camera;
+	var camera = pixelbox.$screen.camera;
 	px = Math.round((px || 0) - camera.x);
 	py = Math.round((py || 0) - camera.y);
 

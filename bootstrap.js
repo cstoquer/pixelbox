@@ -25,37 +25,37 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// var projectData = require('./projectData.json');
+var pixelbox = require('.');
 var projectData = __PROJECT_DATA__;
 
 // projectData.settings.buildTime = __BUILD_TIME__;
 // projectData.settings.version = __GAME_VERSION__;
 // projectData.settings.pixelboxVersion = __PIXELBOX_VERSION__;
-window.settings = projectData.settings;
+var settings = pixelbox.settings = projectData.settings;
 
 var assetLoader = require('./assetLoader');
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // built-in modules
 
-window.inherits = require('./inherits');
+pixelbox.inherits = require('./inherits');
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // electron
 if (__BUILD_TYPE__ === 'electron') {
 	var remote = require('electron').remote;
-	window.setFullScreen = function(value) {
+	pixelbox.setFullScreen = function(value) {
 		remote.getCurrentWindow().setFullScreen(value);
 	}
 } else {
-	window.setFullScreen = function () {};
+	pixelbox.setFullScreen = function () {};
 }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // TINA
 if (__USE_TINA__) {
 	var TINA = require('tina');
-	window.TINA = TINA;
+	pixelbox.TINA = TINA;
 
 	// setup TINA with a ticker
 	var ticker = new TINA.Ticker().useAsDefault();
@@ -89,18 +89,18 @@ if (__USE_TINA__) {
 // Audio Manager
 if (__USE_AUDIO__ || __USE_BLEEPER__) {
 	var AudioManager = require('audio-manager');
-	var audioManager = window.audioManager = new AudioManager(['sfx']);
+	var audioManager = pixelbox.audioManager = new AudioManager(['sfx']);
 	audioManager.settings.audioPath = 'audio/';
 	audioManager.settings.defaultFade = 0.3;
 
 	audioManager.init();
 	audioManager.setVolume('sfx', 1.0);
 
-	window.sfx = function (soundId, volume, panoramic, pitch) {
+	pixelbox.sfx = function (soundId, volume, panoramic, pitch) {
 		audioManager.playSound('sfx', soundId, volume, panoramic, pitch);
 	};
 
-	window.music = function (soundId, volume, loopStart, loopEnd) {
+	pixelbox.music = function (soundId, volume, loopStart, loopEnd) {
 		if (!soundId) {
 			audioManager.stopLoopSound('sfx');
 			return;
@@ -112,9 +112,9 @@ if (__USE_AUDIO__ || __USE_BLEEPER__) {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // controls
 
-var button   = window.btn  = {};
-var bpress   = window.btnp = {};
-var brelease = window.btnr = {};
+var button   = pixelbox.btn  = {};
+var bpress   = pixelbox.btnp = {};
+var brelease = pixelbox.btnr = {};
 var keyMap   = {};
 var buttonNames  = [];
 var buttonLength = 0;
@@ -165,15 +165,15 @@ if (__KEYBOARD__) {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // utility functions
 
-window.chr$ = function (chr) {
+pixelbox.chr$ = function (chr) {
 	return String.fromCharCode(chr);
 };
 
-window.clamp = function (value, min, max) {
+pixelbox.clamp = function (value, min, max) {
 	return Math.max(min, Math.min(max, value));
 };
 
-window.random = function (n, max) {
+pixelbox.random = function (n, max) {
 	if (max === undefined) return ~~(n * Math.random());
 	return ~~(n + Math.random() * (max - n));
 };
@@ -205,7 +205,7 @@ if (__USE_CORE__) {
 	//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 	// Texture
 
-	window.texture = function (img) {
+	pixelbox.texture = function (img) {
 		var texture = new Texture(img.width, img.height);
 		texture.clear().draw(img, 0, 0);
 		return texture;
@@ -214,7 +214,7 @@ if (__USE_CORE__) {
 	 * @param {Image | Texture | Map} img - tilesheet to use as default.
 	 *                         It can be any renderable thing in Pixelbox
 	 */
-	window.tilesheet = function(img) {
+	pixelbox.tilesheet = function(img) {
 		return Texture.prototype.setGlobalTilesheet(img);
 	};
 
@@ -227,7 +227,7 @@ if (__USE_CORE__) {
 		var height    = params.height;
 		var pixelSize = params.pixelSize;
 
-		var texture = window.$screen = new Texture(width, height);
+		var texture = pixelbox.$screen = new Texture(width, height);
 		if (__USE_WEBGL__) texture.canvas = webGL.context.canvas;
 		var canvas = texture.canvas;
 		var style  = canvas.style;
@@ -245,7 +245,7 @@ if (__USE_CORE__) {
 					var fw = sw * ratio;
 					var fh = sh * ratio;
 					// get current canvas (allow $screen redefinition, e.g. webGL)
-					var style = $screen.canvas.style;
+					var style = pixelbox.$screen.canvas.style;
 					style.width  = fw + 'px';
 					style.height = fh + 'px';
 					style.left = (iw - fw) / 2 + 'px';
@@ -266,23 +266,23 @@ if (__USE_CORE__) {
 
 	var screen = createScreen();
 
-	window.cls      = function ()                 { return screen.cls();                    };
-	window.sprite   = function (s, x, y, h, v, r) { return screen.sprite(s, x, y, h, v, r); };
-	window.draw     = function (i, x, y, h, v, r) { return screen.draw(i, x, y, h, v, r);   };
-	window.rect     = function (x, y, w, h)       { return screen.rect(x, y, w, h);         };
-	window.rectf    = function (x, y, w, h)       { return screen.rectf(x, y, w, h);        };
-	window.camera   = function (x, y)             { return screen.setCamera(x, y);          };
-	window.pen      = function (paletteIndex)     { return screen.pen(paletteIndex);        };
-	window.paper    = function (paletteIndex)     { return screen.paper(paletteIndex);      };
+	pixelbox.cls      = function ()                 { return screen.cls();                    };
+	pixelbox.sprite   = function (s, x, y, h, v, r) { return screen.sprite(s, x, y, h, v, r); };
+	pixelbox.draw     = function (i, x, y, h, v, r) { return screen.draw(i, x, y, h, v, r);   };
+	pixelbox.rect     = function (x, y, w, h)       { return screen.rect(x, y, w, h);         };
+	pixelbox.rectf    = function (x, y, w, h)       { return screen.rectf(x, y, w, h);        };
+	pixelbox.camera   = function (x, y)             { return screen.setCamera(x, y);          };
+	pixelbox.pen      = function (paletteIndex)     { return screen.pen(paletteIndex);        };
+	pixelbox.paper    = function (paletteIndex)     { return screen.paper(paletteIndex);      };
 
 	if (__MINI_TEXT__) {
-		window.locate  = function (i, j)            { return screen.locate(i, j);           };
-		window.print   = function (text, x, y)      { return screen.print(text, x, y);      };
-		window.println = function (text)            { return screen.println(text);          };
+		pixelbox.locate  = function (i, j)            { return screen.locate(i, j);           };
+		pixelbox.print   = function (text, x, y)      { return screen.print(text, x, y);      };
+		pixelbox.println = function (text)            { return screen.println(text);          };
 	}
 
-	window.getMap   = TileMap.getMap;
-	window.rectfill = window.rectf; // legacy
+	pixelbox.getMap   = TileMap.getMap;
+	pixelbox.rectfill = pixelbox.rectf; // legacy
 
 	if (__NO_CONTEXT_MENU__) {
 		// disable browser's context menu
@@ -310,7 +310,7 @@ var requestAnimationFrame =
 window.frameId = 0;
 
 function onAssetsLoaded(error, assets) {
-	if (__USE_CORE__) paper(0).pen(1).cls();
+	if (__USE_CORE__) screen.paper(0).pen(1).cls();
 
 	if (error) {
 		console.error(error);
@@ -318,16 +318,23 @@ function onAssetsLoaded(error, assets) {
 		return;
 	}
 
-	window.assets = assets;
+	pixelbox.assets = assets;
+
+	// expose pixelbox on global scope
+	for (var key in pixelbox) {
+		window[key] = pixelbox[key];
+	}
 
 	if (__USE_BLEEPER__) {
-		var bleeper = window.bleeper = require('./bleeper');
+		var bleeper = pixelbox.bleeper = require('./bleeper');
+		window.bleeper = bleeper;
 		// NOTA: `assets.bleeper` program is overwritten with a sound map
 		if (assets.bleeper) bleeper.loadProgram(assets.bleeper);
 	}
 
 	if (__USE_TRACKER__) {
-		var patatracker = window.patatracker = require('./pataTracker');
+		var patatracker = pixelbox.patatracker = require('./pataTracker');
+		window.patatracker = patatracker;
 		if (assets.patatracker) patatracker.loadData(assets.patatracker);
 	}
 
@@ -386,7 +393,7 @@ function onAssetsLoaded(error, assets) {
 		getPalette();
 
 		// set default tilesheet
-		if (assets.tilesheet) tilesheet(assets.tilesheet);
+		if (assets.tilesheet) pixelbox.tilesheet(assets.tilesheet);
 
 		// setup all maps
 		TileMap.loadBank(assets.maps);
@@ -462,8 +469,9 @@ if (__CUSTOM_LOADER__) {
 	var MIDDLE     = ~~(settings.screen.height / 2);
 
 	function showProgress(load, current, count, percent) {
-		rect(CENTER - HALF_WIDTH - 2, MIDDLE - 4, HALF_WIDTH * 2 + 4, 8);
-		rectf(CENTER - HALF_WIDTH, MIDDLE - 2, ~~(percent * HALF_WIDTH * 2), 4);
+		screen
+			.rect(CENTER - HALF_WIDTH - 2, MIDDLE - 4, HALF_WIDTH * 2 + 4, 8)
+			.rectf(CENTER - HALF_WIDTH, MIDDLE - 2, ~~(percent * HALF_WIDTH * 2), 4);
 		if (__USE_WEBGL__) webGL.commit();
 	}
 
@@ -476,12 +484,7 @@ if (__CUSTOM_LOADER__) {
 		new Color().fromString(loaderColors[1])
 	]);
 
-	paper(0);
-	cls();
-	paper(1);
-	pen(1);
-
-	rect(CENTER - HALF_WIDTH - 2, MIDDLE - 4, HALF_WIDTH * 2 + 4, 8); // loading bar border
+	screen.paper(0).cls().paper(1).pen(1).rect(CENTER - HALF_WIDTH - 2, MIDDLE - 4, HALF_WIDTH * 2 + 4, 8); // loading bar border
 	if (__USE_WEBGL__) webGL.commit();
 	assetLoader.preloadStaticAssets(projectData, onAssetsLoaded, showProgress);
 

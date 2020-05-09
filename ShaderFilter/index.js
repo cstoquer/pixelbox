@@ -4,14 +4,15 @@ var webGL        = require('../webGL');
 var context      = webGL.context;
 var batcher      = webGL.batcher;
 var gl           = context.gl;
+var pixelbox     = require('..');
 
 
 // var INT16_SIZE   = 2; // byte
 // var INT8_SIZE    = 1; // byte
 var VERTEX_SIZE  = 4; // 2 positions + 2 uv
 var START_TIME   = Date.now() / 1000;
-var W = $screen.width;
-var H = $screen.height;
+var W = pixelbox.$screen.width;
+var H = pixelbox.$screen.height;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // create vertex buffer for full screen quad
@@ -32,7 +33,7 @@ gl.bufferData(gl.ARRAY_BUFFER, arrayBuffer, gl.STATIC_DRAW); // upload vertex da
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function ShaderFilter(fragmentShader, uniformDef, channels) {
 	this._program    = context.createProgram('', vertexShader, fragmentShader);
-	this._target     = $screen;
+	this._target     = pixelbox.$screen;
 	this._uniformDef = uniformDef || {};
 	this._uniformIds = [];
 	this.uniforms    = {};
