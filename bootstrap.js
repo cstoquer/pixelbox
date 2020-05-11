@@ -443,7 +443,7 @@ function onAssetsLoaded(error, assets) {
 // loader progress bar
 
 if (__CUSTOM_LOADER__) {
-	var customLoader = require('../src/' + __CUSTOM_LOADER__);
+	var customLoader = require('../../src/' + __CUSTOM_LOADER__);
 	function nopAsync(cb) { return cb(); }
 
 	var customStart    = customLoader.onStart || nopAsync;
