@@ -110,7 +110,8 @@ CANVAS.addEventListener('touchstart', function (e) {
 
 	// single touch
 	if (SINGLETOUCH) {
-		touchIdentifier = touches[0].identifier;
+		var touch = touches[0];
+		touchIdentifier = touch.identifier;
 		MOUSE.x = ~~((touch.clientX  - TOUCH_OFFSET_X) / PIXEL_WIDTH);
 		MOUSE.y = ~~((touch.clientY  - TOUCH_OFFSET_Y) / PIXEL_HEIGHT);
 		onStart(MOUSE.x, MOUSE.y, touch.identifier, touch);
@@ -153,7 +154,7 @@ CANVAS.addEventListener('touchmove', function (e) {
 
 CANVAS.addEventListener('touchend', function (e) {
 	e.preventDefault();
-	if (!onEnd) return;
+	if (!onRelease) return;
 
 	var touches = e.changedTouches;
 	for (var t = 0; t < touches.length; t++) {
@@ -165,14 +166,14 @@ CANVAS.addEventListener('touchend', function (e) {
 			if (identifier !== touchIdentifier) continue;
 			MOUSE.x = ~~((touch.clientX  - TOUCH_OFFSET_X) / PIXEL_WIDTH);
 			MOUSE.y = ~~((touch.clientY  - TOUCH_OFFSET_Y) / PIXEL_HEIGHT);
-			onEnd(MOUSE.x, MOUSE.y, touch.identifier, touch);
+			onRelease(MOUSE.x, MOUSE.y, touch.identifier, touch);
 			return;
 		}
 
 		// multitouch
 		var x = ~~((touch.clientX  - TOUCH_OFFSET_X) / PIXEL_WIDTH);
 		var y = ~~((touch.clientY  - TOUCH_OFFSET_Y) / PIXEL_HEIGHT);
-		onEnd(x, y, touch.identifier, touch);
+		onRelease(x, y, touch.identifier, touch);
 	}
 });
 
