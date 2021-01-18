@@ -112,6 +112,7 @@ CANVAS.addEventListener('touchstart', function (e) {
 	if (SINGLETOUCH) {
 		var touch = touches[0];
 		touchIdentifier = touch.identifier;
+		MOUSE.pressed = true;
 		MOUSE.x = ~~((touch.clientX  - TOUCH_OFFSET_X) / PIXEL_WIDTH);
 		MOUSE.y = ~~((touch.clientY  - TOUCH_OFFSET_Y) / PIXEL_HEIGHT);
 		onStart(MOUSE.x, MOUSE.y, touch.identifier, touch);
@@ -164,6 +165,7 @@ CANVAS.addEventListener('touchend', function (e) {
 		// single touch
 		if (SINGLETOUCH) {
 			if (identifier !== touchIdentifier) continue;
+			MOUSE.pressed = false;
 			MOUSE.x = ~~((touch.clientX  - TOUCH_OFFSET_X) / PIXEL_WIDTH);
 			MOUSE.y = ~~((touch.clientY  - TOUCH_OFFSET_Y) / PIXEL_HEIGHT);
 			onRelease(MOUSE.x, MOUSE.y, touch.identifier, touch);
@@ -189,6 +191,7 @@ CANVAS.addEventListener('touchcancel', function (e) {
 		// single touch
 		if (SINGLETOUCH) {
 			if (identifier !== touchIdentifier) continue;
+			MOUSE.pressed = false;
 			onCancel(touch.identifier, touch);
 			return;
 		}
