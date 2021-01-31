@@ -1,5 +1,5 @@
 var Texture      = require('./index.js');
-var createCanvas = require('../domUtils/createCanvas');
+var minitext     = require('./minitext');
 var batcher      = require('../webGL/batcher');
 var renderers    = batcher.renderers;
 
@@ -11,51 +11,12 @@ var OX            = 0;
 var OY            = 0;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-var MINITEXT = [
-	// 219,   438,   511,   14016, 14043, 14326, 14335, 28032, 28123, 28086, 28159, 32704, 32731, 32758, 32767, 128,
-	// 146,   384,   402,   9344,  9362,  9600,  9618,  192,   210,   448,   466,   9408,  9426,  9664,  9682,  32767,
-	0,     8338,  45,    11962, 5588,  21157, 29354, 10,    17556, 5265,  21973, 1488,  5312,  448,   13824, 5268,
-	31599, 29843, 29671, 31143, 18925, 31183, 31689, 18735, 31727, 18927, 1040,  5136,  17492, 3640,  5393,  8359,
-	25450, 23530, 31467, 25166, 15211, 29391, 4815,  27470, 23533, 29847, 15142, 23277, 29257, 23421, 23403, 11114,
-	4843,  26474, 23279, 14798, 9367,  27501, 12141, 24429, 23213, 14829, 29351, 25750, 17553, 13459, 9402,  28672,
-	34,    23530, 31467, 25166, 15211, 29391, 4815,  27470, 23533, 29847, 15142, 23277, 29257, 23421, 23403, 11114,
-	4843,  26474, 23279, 14798, 9367,  27501, 12141, 24429, 23213, 14829, 29351, 25686, 9362,  13587, 42,    21845
-];
-
-function createDefaultCharset() {
-	var canvas = createCanvas(64, 36);
-	var ctx = canvas.getContext('2d');
-	ctx.fillStyle = '#000';
-	ctx.fillRect(0, 0, 64, 36);
-
-	ctx.fillStyle = '#FFF';
-	for (var c = 0; c < MINITEXT.length; c++) {
-		var code = MINITEXT[c];
-
-		var i = c % 16;
-		var j = ~~(c / 16);
-
-		for (var bit = 0; bit < 15; bit++) {
-			var x = bit % 3;
-			var y = ~~(bit / 3);
-			var pixel = (code >> bit) & 1;
-			if (pixel !== 1) continue;
-			ctx.fillRect(i * CHAR_WIDTH + x, j * CHAR_HEIGHT + y, 1, 1);
-		}
-	}
-	return canvas;
-}
-
-var DEFAULT_CHARSET = createDefaultCharset();
-var CHARSET_IMG = DEFAULT_CHARSET;
+var DEFAULT_CHARSET = minitext();
+var CHARSET = DEFAULT_CHARSET;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 var _resize = Texture.prototype.resize;
 Texture.prototype.resize = function (width, height) {
-	this._textColumn   = ~~(width  / CHAR_WIDTH);
-	this._textLine     = ~~(height / CHAR_HEIGHT);
-	this._textPadding  = height - this._textLine * CHAR_HEIGHT;
-
 	this._cursor.i = 0;
 	this._cursor.j = 0;
 
@@ -92,7 +53,7 @@ Texture.prototype.print = function (str, x, y) {
 	}
 
 	// prepare renderer
-	var renderer = batcher.prepare(renderers.colorSprite, CHARSET_IMG, this);
+	var renderer = batcher.prepare(renderers.colorSprite, CHARSET, this);
 
 	var color = this.palette[this._pen];
 	var r = color.r;
@@ -129,18 +90,16 @@ Texture.prototype.print = function (str, x, y) {
 	var j = this._cursor.j;
 
 	for (var c = 0; c < str.length; c++) {
-		if (i > this._textColumn) {
-			j += 1;
+		if (this.width - i * CHAR_WIDTH < CHAR_WIDTH) {
 			i = 0;
+			j += 1;
 		}
-
-		if (j > this._textLine) {
+		if (this.height - j * CHAR_HEIGHT < CHAR_HEIGHT) {
 			this.textScroll();
 			j -= 1;
 			// don't forget to switch back the renderer
-			renderer = batcher.prepare(renderers.colorSprite, CHARSET_IMG, this);
+			renderer = batcher.prepare(renderers.colorSprite, CHARSET, this);
 		}
-
 		var chr = str.charCodeAt(c);
 		if (chr === 10 || chr === 13) {
 			j += 1;
@@ -152,7 +111,6 @@ Texture.prototype.print = function (str, x, y) {
 			i += 1;
 			continue;
 		}
-
 		var sx = CHAR_WIDTH  *   (chr % CHAR_PER_LINE) + OX;
 		var sy = CHAR_HEIGHT * ~~(chr / CHAR_PER_LINE) + OY;
 		renderer.pushSprite(i * CHAR_WIDTH, j * CHAR_HEIGHT, CHAR_WIDTH, CHAR_HEIGHT, sx, sy, r, g, b);
@@ -194,21 +152,23 @@ Texture.prototype.textScroll = function (n) {
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 Texture.prototype.setCharset = function (img) {
-	CHARSET_IMG = img || DEFAULT_CHARSET;
-	CHAR_WIDTH  = ~~(CHARSET_IMG.width / 16);
-	CHAR_HEIGHT = ~~(CHARSET_IMG.height / 6);
+	var i = this._cursor.i * CHAR_WIDTH;
+	var j = this._cursor.j * CHAR_HEIGHT;
+
+	CHARSET = img || DEFAULT_CHARSET;
+	CHAR_WIDTH  = ~~(CHARSET.width / 16);
+	CHAR_HEIGHT = ~~(CHARSET.height / 6);
+
+	this._cursor.i = Math.ceil(i / CHAR_WIDTH);
+	this._cursor.j = Math.ceil(j / CHAR_HEIGHT);
 
 	OX = 0;
 	OY = 0;
 
 	// if charset is a sprite in an atlas
-	if (CHARSET_IMG._isSprite) {
-		OX = CHARSET_IMG.x;
-		OY = CHARSET_IMG.y;
-		CHARSET_IMG = CHARSET_IMG.img;
+	if (CHARSET._isSprite) {
+		OX = CHARSET.x;
+		OY = CHARSET.y;
+		CHARSET = CHARSET.img;
 	}
-
-	this._textColumn   = ~~(this.width  / CHAR_WIDTH)  - 1;
-	this._textLine     = ~~(this.height / CHAR_HEIGHT) - 1;
-	this._textPadding  = this.height - this._textLine * CHAR_HEIGHT;
 };
