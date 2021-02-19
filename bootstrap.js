@@ -191,6 +191,7 @@ if (__USE_CORE__) {
 		webGL = require('./webGL');
 		require('./Texture/webGL');
 		require('./TileMap/webGL');
+		pixelbox.webGL = webGL;
 		if (__MINI_TEXT__) require('./Texture/textWebGL');
 	} else {
 		require('./Texture/canvas2D');

@@ -136,8 +136,6 @@ exports.loadSound = loadSound;
  */
 
 function preloadStaticAssets(assetList, cb, onEachLoad) {
-	// loadJson('build/data.json', function onAssetListLoaded(error, assetList) {
-	// if (error) return cb(error);
 	var data     = assetList.dat;
 	var imgCount = assetList.img.length;
 	var count    = imgCount + assetList.snd.length;
