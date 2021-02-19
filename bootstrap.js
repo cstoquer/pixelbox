@@ -277,9 +277,10 @@ if (__USE_CORE__) {
 	pixelbox.paper    = function (paletteIndex)     { return screen.paper(paletteIndex);      };
 
 	if (__MINI_TEXT__) {
-		pixelbox.locate  = function (i, j)            { return screen.locate(i, j);           };
-		pixelbox.print   = function (text, x, y)      { return screen.print(text, x, y);      };
-		pixelbox.println = function (text)            { return screen.println(text);          };
+		pixelbox.locate     = function (i, j)         { return screen.locate(i, j);           };
+		pixelbox.print      = function (text, x, y)   { return screen.print(text, x, y);      };
+		pixelbox.println    = function (text)         { return screen.println(text);          };
+		pixelbox.setCharset = function (img)          { return screen.setCharset(img);        };
 	}
 
 	pixelbox.getMap   = TileMap.getMap;
