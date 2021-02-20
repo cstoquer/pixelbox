@@ -399,6 +399,12 @@ function onAssetsLoaded(error, assets) {
 
 		// setup all maps
 		TileMap.loadBank(assets.maps);
+
+		// setup nine slice
+		if (assets.slicesConfig) {
+			var initNineSlices = require('./NineSlice/init');
+			initNineSlices(assets.slicesConfig);
+		}
 	}
 
 	if (__GAMEPAD__) {

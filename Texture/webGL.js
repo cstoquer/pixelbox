@@ -66,6 +66,16 @@ Texture.prototype.sprite = function (tile, x, y, flipH, flipV, flipR) {
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 Texture.prototype.draw = function (img, x, y, flipH, flipV, flipR) {
+	if (!img) {
+		console.error('Invalid asset');
+		return this;
+	}
+
+	if (img._isNineSlice) {
+		img._draw(this, x, y, flipH, flipV);
+		return this;
+	}
+
 	if (img === this) {
 		// webGL cannot draw a texture in itslef.
 		if (!this._copyTexture) {
@@ -115,6 +125,41 @@ Texture.prototype.draw = function (img, x, y, flipH, flipV, flipR) {
 			.prepare(renderers.sprite, img, this)
 			.pushSprite(x, y, img.width, img.height, 0, 0, flipH, flipV, flipR);
 	}
+
+	return this;
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+Texture.prototype.stretchDraw = function (asset, x, y, w, h) {
+	// Sprite
+	if (asset._isSprite) {
+		var sprite = asset;
+		asset = sprite.img;
+		var sx = sprite.x;
+		var sy = sprite.y;
+		var sw = sprite.width;
+		var sh = sprite.height;
+
+
+		var px = ~~Math.round((x || 0) - this.camera.x);
+		var py = ~~Math.round((y || 0) - this.camera.y);
+
+		batcher
+			.prepare(renderers.sprite, asset, this)
+			.pushStretchSprite(px, py, w, h, sx, sy, sw, sh);
+
+		return this;
+	}
+
+	// Image or Texture
+	if (asset._isTexture) asset = asset.canvas;
+
+	var px = ~~Math.round((x || 0) - this.camera.x);
+	var py = ~~Math.round((y || 0) - this.camera.y);
+
+	batcher
+		.prepare(renderers.sprite, asset, this)
+		.pushStretchSprite(px, py, w, h, 0, 0, img.width, img.height);
 
 	return this;
 };

@@ -20,6 +20,33 @@ function SpriteRenderer() {
 }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+SpriteRenderer.prototype.pushQuad = function (
+	xA, yA, uA, vA,
+	xB, yB, uB, vB,
+	xC, yC, uC, vC,
+	xD, yD, uD, vD
+) {
+	var V = this.batcher.vertexBuffer.shortView;
+	var i = this.batcher._batchIndex;
+
+	//  A ┌──┐ B
+	//    │1/│
+	//    │/2│
+	//  D └──┘ C
+
+	V[i++] = xA; V[i++] = yA; V[i++] = uA; V[i++] = vA; // A
+	V[i++] = xB; V[i++] = yB; V[i++] = uB; V[i++] = vB; // B
+	V[i++] = xC; V[i++] = yC; V[i++] = uC; V[i++] = vC; // C
+	V[i++] = xD; V[i++] = yD; V[i++] = uD; V[i++] = vD; // D
+
+	if (i < FLUSH_TRIGGER) {
+		this.batcher._batchIndex = i;
+	} else {
+		this.batcher.flush();
+	}
+};
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 /**
  * NOTA: all values must be integer.
  */
@@ -27,14 +54,6 @@ SpriteRenderer.prototype.pushSprite = function (x1, y1, w, h, u1, v1, flipH, fli
 	var x2, y2;
 	var u2 = u1 + w;
 	var v2 = v1 + h;
-
-	//  A ┌──┐ B
-	//    │1/│
-	//    │/2│
-	//  D └──┘ C
-
-	var V = this.batcher.vertexBuffer.shortView;
-	var i = this.batcher._batchIndex;
 
 	// flip flags
 	var t;
@@ -57,10 +76,12 @@ SpriteRenderer.prototype.pushSprite = function (x1, y1, w, h, u1, v1, flipH, fli
 			t = uB; uB = uD; uD = t;
 		}
 
-		V[i++] = x1; V[i++] = y1; V[i++] = uA; V[i++] = vA; // A
-		V[i++] = x2; V[i++] = y1; V[i++] = uB; V[i++] = vB; // B
-		V[i++] = x2; V[i++] = y2; V[i++] = uC; V[i++] = vC; // C
-		V[i++] = x1; V[i++] = y2; V[i++] = uD; V[i++] = vD; // D
+		this.pushQuad(
+			x1, y1, uA, vA,
+			x2, y1, uB, vB,
+			x2, y2, uC, vC,
+			x1, y2, uD, vD
+		);
 
 	} else {
 		x2 = x1 + w;
@@ -69,17 +90,28 @@ SpriteRenderer.prototype.pushSprite = function (x1, y1, w, h, u1, v1, flipH, fli
 		if (flipH) { t = u1; u1 = u2; u2 = t; }
 		if (flipV) { t = v1; v1 = v2; v2 = t; }
 
-		V[i++] = x1; V[i++] = y1; V[i++] = u1; V[i++] = v1; // A
-		V[i++] = x2; V[i++] = y1; V[i++] = u2; V[i++] = v1; // B
-		V[i++] = x2; V[i++] = y2; V[i++] = u2; V[i++] = v2; // C
-		V[i++] = x1; V[i++] = y2; V[i++] = u1; V[i++] = v2; // D
+		this.pushQuad(
+			x1, y1, u1, v1,
+			x2, y1, u2, v1,
+			x2, y2, u2, v2,
+			x1, y2, u1, v2
+		);
 	}
+};
 
-	if (i < FLUSH_TRIGGER) {
-		this.batcher._batchIndex = i;
-	} else {
-		this.batcher.flush();
-	}
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+SpriteRenderer.prototype.pushStretchSprite = function (x1, y1, w, h, u1, v1, spriteW, spriteH) {
+	var u2 = u1 + spriteW;
+	var v2 = v1 + spriteH;
+	var x2 = x1 + w;
+	var y2 = y1 + h;
+
+	this.pushQuad(
+		x1, y1, u1, v1,
+		x2, y1, u2, v1,
+		x2, y2, u2, v2,
+		x1, y2, u1, v2
+	);
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄

@@ -99,6 +99,16 @@ Texture.prototype.sprite = function (tile, x, y, flipH, flipV, flipR) {
  * @returns {Texture} the texture itself
  */
 Texture.prototype.draw = function (img, x, y, flipH, flipV, flipR) {
+	if (!img) {
+		console.error('Invalid asset');
+		return this;
+	}
+
+	if (img._isNineSlice) {
+		img._draw(this, x, y, flipH, flipV);
+		return this;
+	}
+
 	var hasFlip = flipH || flipV || flipR;
 
 	// spritesheet element
@@ -173,6 +183,36 @@ Texture.prototype.draw = function (img, x, y, flipH, flipV, flipR) {
 	ctx.restore();
 	return this;
 };
+
+//▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+Texture.prototype.stretchDraw = function (asset, x, y, w, h) {
+	// spritesheet element
+	if (asset._isSprite) {
+		var sprite = asset;
+		asset = sprite.img;
+		var sx = sprite.x;
+		var sy = sprite.y;
+		var sw = sprite.width;
+		var sh = sprite.height;
+
+
+		var px = ~~Math.round((x || 0) - this.camera.x);
+		var py = ~~Math.round((y || 0) - this.camera.y);
+
+		this.ctx.drawImage(asset, sx, sy, sw, sh, px, py, w, h);
+		return this;
+	}
+
+	// Image or Texture
+	if (asset._isTexture) asset = asset.canvas;
+
+	var px = ~~Math.round((x || 0) - this.camera.x);
+	var py = ~~Math.round((y || 0) - this.camera.y);
+
+	this.ctx.drawImage(asset, 0, 0, asset.width, asset.height, px, py, w, h);
+	return this;
+};
+
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 /** Clear the whole texture (make it transparent)
