@@ -323,7 +323,6 @@ Texture.prototype.resize = function (width, height) {
 };
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-Texture.prototype._isTexture = true;
 Texture.prototype._isGlTexture = true;
 
 // FIXME better have all these private

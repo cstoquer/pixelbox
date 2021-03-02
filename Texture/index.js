@@ -27,6 +27,7 @@ function Texture(width, height) {
 	this._init();
 }
 module.exports = Texture;
+Texture.prototype._isTexture = true;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 // FIXME better have all these private

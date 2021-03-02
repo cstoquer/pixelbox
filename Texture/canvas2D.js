@@ -302,7 +302,6 @@ Texture.prototype.rectf = function (x, y, w, h) {
 Texture.prototype.rectfill = Texture.prototype.rectf;
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-Texture.prototype._isTexture = true;
 
 // TODO: do we need the default tilesheet to have full dimensions?
 Texture.prototype.tilesheet = createCanvas(TILE_WIDTH * TILES_PER_LINE, TILE_HEIGHT * TILES_PER_LINE);
