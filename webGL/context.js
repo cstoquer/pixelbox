@@ -124,7 +124,7 @@ function useProgram(program) {
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 var _textureMap = new WeakMap();
 
-function _getTextureFromImage(image) {
+function getTextureFromImage(image) {
 	// var texture = image._glTexture;
 	var texture = _textureMap.get(image);
 	if (texture) return texture;
@@ -168,7 +168,7 @@ function bindTexture(program, channel, uniformId, index) {
 		texture = channel.ctx;
 	} else {
 		// We assume normal image
-		texture = _getTextureFromImage(channel);
+		texture = getTextureFromImage(channel);
 	}
 
 	gl.activeTexture(gl.TEXTURE0 + index);
@@ -177,9 +177,10 @@ function bindTexture(program, channel, uniformId, index) {
 }
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-exports.canvas        = canvas;
-exports.gl            = gl;
-exports.programs      = programs;
-exports.createProgram = createProgram;
-exports.useProgram    = useProgram;
-exports.bindTexture   = bindTexture;
+exports.canvas              = canvas;
+exports.gl                  = gl;
+exports.programs            = programs;
+exports.createProgram       = createProgram;
+exports.useProgram          = useProgram;
+exports.bindTexture         = bindTexture;
+exports.getTextureFromImage = getTextureFromImage;

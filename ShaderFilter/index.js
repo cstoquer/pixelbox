@@ -95,7 +95,20 @@ ShaderFilter.prototype._checkUniform = function (uniformId, type, value) {
 ShaderFilter.prototype._checkChannel = function (uniformId, channel) {
 	try {
 		gl.getUniformLocation(this._program, uniformId);
-		if (channel) return channel;
+		if (channel) {
+			if (channel._isTexture) {
+				return channel;
+			}
+			if (channel._isSprite) {
+				var texture = new Texture(channel.width, channel.height);
+				texture.draw(channel, 0, 0);
+				return texture;
+			}
+			if (channel instanceof Image) {
+				return context.getTextureFromImage(channel);
+			}
+			console.error(uniformId + ' type not supported');
+		}
 		return new Texture(W, H);
 	} catch (e) {
 		return null;
@@ -120,9 +133,9 @@ function enableAttribute(program, variableName) {
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 function bindChannel(program, channel, uniformId, index) {
-	if (!channel) return;
+	if (channel._isGlTexture) channel = channel.ctx;
 	gl.activeTexture(gl.TEXTURE0 + index);
-	gl.bindTexture(gl.TEXTURE_2D, channel.ctx);
+	gl.bindTexture(gl.TEXTURE_2D, channel);
 	gl.uniform1i(gl.getUniformLocation(program, uniformId), index);
 	return this;
 };
@@ -169,10 +182,10 @@ ShaderFilter.prototype.render = function () {
 	gl.vertexAttribPointer(enableAttribute(program, 'a_coordinates'), 2, gl.BYTE, false, /* INT8_SIZE * */ VERTEX_SIZE, 0);
 	gl.vertexAttribPointer(enableAttribute(program, 'a_uv'),          2, gl.BYTE, false, /* INT8_SIZE * */ VERTEX_SIZE, /* INT8_SIZE * */ 2);
 
-	bindChannel(program, this.channel0, 'iChannel0', 0);
-	bindChannel(program, this.channel1, 'iChannel1', 1);
-	bindChannel(program, this.channel2, 'iChannel2', 2);
-	bindChannel(program, this.channel3, 'iChannel3', 3);
+	if (this.channel0) bindChannel(program, this.channel0, 'iChannel0', 0);
+	if (this.channel1) bindChannel(program, this.channel1, 'iChannel1', 1);
+	if (this.channel2) bindChannel(program, this.channel2, 'iChannel2', 2);
+	if (this.channel3) bindChannel(program, this.channel3, 'iChannel3', 3);
 
 	gl.drawArrays(gl.TRIANGLES, 0, 6);
 
